@@ -18,7 +18,7 @@
         inherit system;
 	modules = [
           ./hosts/${hostName}/configuration.nix
-          ./luks.nix
+          ./luks-symlink.nix
           "${modulesDir}/common.nix"
           "${modulesDir}/desktop.nix"
 
