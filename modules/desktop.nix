@@ -4,7 +4,12 @@
   services.displayManager.sddm.enable = true;
   services.displayManager.defaultSession = "hyprland";
 
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  programs.waybar.enable = true;
 
   services.dbus.enable = true;
   xdg.portal.enable = true;
@@ -16,11 +21,27 @@
   networking.networkmanager.enable=true;
 
   environment.systemPackages = with pkgs; [
-    waybar
-    kitty
+    kitty # needed on isntall
+
+    brightnessctl
+    dunst
+    swaylock
+
+    # for screenshots
+    grim
+    slurp
+
+    # Volume and audio
+    pavucontrol
+
+    # filesystem
+    nautilus
+
     wofi
-    wl-clipboard
     dconf
+
     hyprpaper
+
+    wl-clipboard
     ];
   }
