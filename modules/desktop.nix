@@ -21,5 +21,6 @@
     rofi-wayland
     wl-clipboard
     dconf
+    hyprpaper
     ];
   }
