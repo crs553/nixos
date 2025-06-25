@@ -1,0 +1,37 @@
+**/hardware-configuration.nix
+
+# Nix build artifacts
+/result
+/result-*
+*.drv
+*.out
+*.tmp
+*.log
+
+# Flake lock file (optional to ignore, see note)
+# You can keep this *tracked* to ensure reproducibility
+# !flake.lock
+
+# Editor/IDE files
+.vscode/
+.idea/
+*.swp
+*~
+
+# Secrets and encrypted config (optional)
+secrets/
+*.age
+*.gpg
+*.enc
+
+# Nix garbage collector roots (if any)
+/nix/
+
+# Disk images (if building ISO or VM)
+*.iso
+*.qcow2
+
+# Misc system outputs
+cache/
+tmp/
+
