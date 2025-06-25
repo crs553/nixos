@@ -63,4 +63,12 @@
 
   services.tailscale.enable = true;
 
+  fonts.packages = with pkgs; [
+      font-awesome
+      powerline-fonts
+      powerline-symbols
+      nerd-fonts._0xproto
+      nerd-fonts.droid-sans-mono
+  ];
+
 }
