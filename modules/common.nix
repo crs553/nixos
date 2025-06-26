@@ -88,6 +88,7 @@
     # Markdown
     unstablePkgs.marp-cli
     unstablePkgs.pandoc
+    unstablePkgs.texliveSmall
 
   ];
 
