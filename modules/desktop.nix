@@ -56,7 +56,7 @@
     nautilus
     udisks2
     polkit_gnome
-    gnome.gnome-disk-utility
+    gnome-disk-utility
 
     wofi
     dconf
