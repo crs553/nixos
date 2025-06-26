@@ -78,10 +78,20 @@
     # Virtualisation/VMs
     unstablePkgs.quickemu
     unstablePkgs.spice-gtk
+
+    # Messaging
+    unstablePkgs.signal-desktop
+
+    # Teaching
     unstablePkgs.openboard
+
+    # Markdown
+    unstablePkgs.marp-cli
+    unstablePkgs.pandoc
 
   ];
 
+  # Used for spice usb redirection in quickemu
   virtualisation.spiceUSBRedirection.enable = true;
 
 
