@@ -90,6 +90,7 @@
     unstablePkgs.pandoc
     unstablePkgs.texliveSmall
 
+    fzf
   ];
 
   # Used for spice usb redirection in quickemu

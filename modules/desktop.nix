@@ -54,6 +54,9 @@
 
     # filesystem
     nautilus
+    udisks2
+    polkit_gnome
+    gnome.gnome-disk-utility
 
     wofi
     dconf
