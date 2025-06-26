@@ -40,6 +40,9 @@
     # Volume and audio
     pavucontrol
 
+    # Sys tray
+    networkmanagerapplet
+
     # filesystem
     nautilus
 
