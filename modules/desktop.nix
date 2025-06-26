@@ -2,7 +2,9 @@
 {
   services.xserver.enable = true;
   services.displayManager.sddm.enable = true;
-  services.displayManager.defaultSession = "hyprland";
+  #services.displayManager.defaultSession = "hyprland";
+  services.displayManager.defaultSession = "hyprland-uwsm";
+
 
   programs.hyprland = {
     enable = true;
@@ -12,7 +14,11 @@
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  programs.waybar.enable = true;
+  programs.waybar = {
+    enable = true;
+    systemd.enable = true;
+    systemd.target = "hyprland-session.target";
+  };
 
   # dark mode
   environment.variables.GTK_THEME = "Adwaita:dark";
