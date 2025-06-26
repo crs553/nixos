@@ -9,7 +9,12 @@
     xwayland.enable = true;
   };
 
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   programs.waybar.enable = true;
+
+  # dark mode
+  environment.variables.GTK_THEME = "Adwaita:dark";
 
   services.dbus.enable = true;
   xdg.portal.enable = true;
