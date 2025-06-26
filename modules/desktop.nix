@@ -27,6 +27,7 @@
 
   environment.systemPackages = with pkgs; [
     kitty # needed on isntall
+    wezterm
 
     brightnessctl
     dunst
