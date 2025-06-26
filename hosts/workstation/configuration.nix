@@ -1,4 +1,4 @@
-{ config, pkgs, hardwareConfigPath ? null,... }:
+{ config, pkgs,... }:
 
 {
   imports =
