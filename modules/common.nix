@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, unstablePkgs, ... }:
 
 {
 
@@ -63,14 +63,27 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     btop
-    neovim
     wget
+
+    # Editors
+    unstablePkgs.neovim
 
     # Language support
     git
     nixd
     harper
+    unstablePkgs.rustup
+    unstablePkgs.cargo
+
+    # Virtualisation/VMs
+    unstablePkgs.quickemu
+    unstablePkgs.spice-gtk
+    unstablePkgs.openboard
+
   ];
+
+  virtualisation.spiceUSBRedirection.enable = true;
+
 
   ### TAILSCALE ###
   services.resolved.enable = true;
