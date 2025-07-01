@@ -2,7 +2,6 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      #./hardware-configuration.nix
       /etc/nixos/hardware-configuration.nix
     ];
 
@@ -54,6 +53,17 @@
 
   environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
 
+
+  lsp = {
+    enableBash = true;
+    enablePython = true;
+    enableGo = true;
+    enableLua = true;
+    enableRust = true;
+    enableMarkdown = true;
+    enableHarper = true;
+    enableNix = true;
+  };
 
 
 }
