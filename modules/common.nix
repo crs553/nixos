@@ -64,6 +64,7 @@
   environment.systemPackages = with pkgs; [
     btop
     wget
+    ripgrep
 
     # Editors
     unstablePkgs.neovim
