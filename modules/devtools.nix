@@ -25,9 +25,13 @@ in {
 
         # Python
         (optional cfg.enablePython python3)
-        (optional cfg.enablePython (python3.withPackages (ps: [ ps.python-lsp-server ])))
-        (optional cfg.enablePython pylint)
-        (optional cfg.enablePython black)
+        (optional cfg.enablePython (
+            pkgs.python3.withPackages (ps: [
+                ps.python-lsp-server
+                ps.pylint
+                ps.black
+            ])
+            ))
 
         # Go
         (optional cfg.enableGo gopls)
