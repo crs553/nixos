@@ -6,14 +6,14 @@ let
   cfg = config.lsp;
 in {
   options.lsp = {
-    enableBash = mkEnableOption "Enable Bash LSP";
-    enablePython = mkEnableOption "Enable Python tools (pylsp, pylint, black, python)";
-    enableGo = mkEnableOption "Enable Go LSP (gopls)";
-    enableLua = mkEnableOption "Enable Lua LSP";
-    enableRust = mkEnableOption "Enable Rust tools (rust-analyzer, rustup, cargo)";
-    enableMarkdown = mkEnableOption "Enable Markdown LSPs (marksman, markdownlint)";
-    enableHarper = mkEnableOption "Enable HarperDB LSP";
-    enableNix = mkEnableOption "Enable Nix LSP (nixd)";
+    enableBash = mkEnableOption "Enable Bash LSP" true;
+    enablePython = mkEnableOption "Enable Python tools (pylsp, pylint, black, python)" true;
+    enableGo = mkEnableOption "Enable Go LSP (gopls)" true;
+    enableLua = mkEnableOption "Enable Lua LSP" true;
+    enableRust = mkEnableOption "Enable Rust tools (rust-analyzer, rustup, cargo)" true;
+    enableMarkdown = mkEnableOption "Enable Markdown LSPs (marksman, markdownlint)" true;
+    enableHarper = mkEnableOption "Enable HarperDB LSP" true;
+    enableNix = mkEnableOption "Enable Nix LSP (nixd)" true;
   };
 
   config = {
