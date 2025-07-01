@@ -3,22 +3,26 @@
 with lib;
 
 let
-  cfg = config.lsp;
+  cfg = config.devtools;  # Changed from lsp to devtools
 in {
-  options.lsp = {
-    enableBash = mkEnableOption "Enable Bash LSP" ;
-    enablePython = mkEnableOption "Enable Python tools (pylsp, pylint, black, python)" ;
-    enableGo = mkEnableOption "Enable Go LSP (gopls)" ;
-    enableLua = mkEnableOption "Enable Lua LSP" ;
-    enableRust = mkEnableOption "Enable Rust tools (rust-analyzer, rustup, cargo)" ;
-    enableMarkdown = mkEnableOption "Enable Markdown LSPs (marksman, markdownlint)" ;
-    enableHarper = mkEnableOption "Enable HarperDB LSP" ;
-    enableNix = mkEnableOption "Enable Nix LSP (nixd)" ;
+  options.devtools = {  # Changed from lsp to devtools
+    enableGit = mkEnableOption "Enable Git devtools";
+    enableBash = mkEnableOption "Enable Bash devtools";
+    enablePython = mkEnableOption "Enable Python tools (pylsp, pylint, black, python)";
+    enableGo = mkEnableOption "Enable Go devtools (gopls)";
+    enableLua = mkEnableOption "Enable Lua devtools";
+    enableRust = mkEnableOption "Enable Rust tools (rust-analyzer, rustup, cargo)";
+    enableMarkdown = mkEnableOption "Enable Markdown devtools (marksman, markdownlint)";
+    enableHarper = mkEnableOption "Enable HarperDB devtools";
+    enableNix = mkEnableOption "Enable Nix devtools (nixd)";
   };
 
   config = {
     environment.systemPackages = with pkgs; lib.optionals true (
       lib.flatten [
+
+        # Git
+        (optional cfg.enableGit git)
 
         # Bash
         (optional cfg.enableBash bash-language-server)

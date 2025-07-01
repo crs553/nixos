@@ -68,9 +68,6 @@
     # Editors
     unstablePkgs.neovim
 
-    # Language support
-    git
-    
     # Virtualisation/VMs
     unstablePkgs.quickemu
     unstablePkgs.spice-gtk
@@ -159,4 +156,18 @@
     enable = true;
     enableSSHSupport = true;
   };
+
+  # Language support
+  devtools = {
+    enableGit = true;
+    enableBash = true;
+    enablePython = true;
+    enableGo = true;
+    enableLua = true;
+    enableRust = true;
+    enableMarkdown = true;
+    enableHarper = true;
+    enableNix = true;
+  };
+
 }

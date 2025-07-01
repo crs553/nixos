@@ -54,16 +54,5 @@
   environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
 
 
-  lsp = {
-    enableBash = true;
-    enablePython = true;
-    enableGo = true;
-    enableLua = true;
-    enableRust = true;
-    enableMarkdown = true;
-    enableHarper = true;
-    enableNix = true;
-  };
-
 
 }
