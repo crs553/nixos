@@ -70,11 +70,7 @@
 
     # Language support
     git
-    nixd
-    harper
-    unstablePkgs.rustup
-    unstablePkgs.cargo
-
+    
     # Virtualisation/VMs
     unstablePkgs.quickemu
     unstablePkgs.spice-gtk
@@ -101,6 +97,8 @@
   services.resolved.enable = true;
   services.tailscale.enable = true;
   services.tailscale.useRoutingFeatures = "client";
+  services.mullvad-vpn.enable = true;
+  services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
   # ZOXIDE
   programs.zoxide.enable = true;

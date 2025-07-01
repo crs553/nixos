@@ -20,6 +20,7 @@
           /etc/nixos/luks.nix
           "${modulesDir}/common.nix"
           "${modulesDir}/desktop.nix"
+          "${modulesDir}/devtools.nix"
 
           # global system version
           { system.stateVersion = "25.05"; }
