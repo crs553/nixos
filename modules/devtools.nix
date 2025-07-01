@@ -25,7 +25,7 @@ in {
 
         # Python
         (optional cfg.enablePython python3)
-        (optional cfg.enablePython python3Packages.python-lsp-server)
+        (optional cfg.enablePython (python3.withPackages (ps: [ ps.python-lsp-server ])))
         (optional cfg.enablePython pylint)
         (optional cfg.enablePython black)
 
