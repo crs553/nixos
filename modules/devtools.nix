@@ -33,6 +33,7 @@ in {
                 ps.python-lsp-server
                 ps.pylint
                 ps.black
+                ps.isort
             ])
             ))
 
