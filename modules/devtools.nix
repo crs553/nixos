@@ -24,7 +24,6 @@ in {
         (optional cfg.enableBash bash-language-server)
 
         # Python
-        (optional cfg.enablePython python3)
         (optional cfg.enablePython (
             pkgs.python3.withPackages (ps: [
                 ps.python-lsp-server
