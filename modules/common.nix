@@ -65,6 +65,7 @@
     btop
     wget
     ripgrep
+    fzf
 
     # Editors
     unstablePkgs.neovim
@@ -84,7 +85,8 @@
     unstablePkgs.pandoc
     unstablePkgs.texliveSmall
 
-    fzf
+    unstablePkgs.ladybird
+
   ];
 
   # Used for spice usb redirection in quickemu
