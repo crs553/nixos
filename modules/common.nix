@@ -55,6 +55,7 @@
 	  mpv
       feh
       starship
+      unstablePkgs.pipeline
     ];
   };
 
