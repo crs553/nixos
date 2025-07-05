@@ -66,9 +66,14 @@
     wget
     ripgrep
     fzf
+    gcc
+    gnumake
 
     # Editors
     unstablePkgs.neovim
+    nodejs
+    tree-sitter
+    fd
 
     # Virtualisation/VMs
     unstablePkgs.quickemu
