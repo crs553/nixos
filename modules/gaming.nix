@@ -3,9 +3,9 @@
 with lib;
 
 let
-  cfg = config.devtools;
+  cfg = config.gaming;
 in {
-  options.devtools = {
+  options.gaming = {
     enableSteam = mkEnableOption "Enable Steam";
   };
 

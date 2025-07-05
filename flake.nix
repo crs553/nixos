@@ -21,6 +21,8 @@
           "${modulesDir}/common.nix"
           "${modulesDir}/desktop.nix"
           "${modulesDir}/devtools.nix"
+          "${modulesDir}/gaming.nix"
+
 
           # global system version
           { system.stateVersion = "25.05"; }
