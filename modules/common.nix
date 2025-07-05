@@ -87,6 +87,9 @@
 
     unstablePkgs.ladybird
 
+    unstablePkgs.yt-dlp
+    mpv
+
   ];
 
   # Used for spice usb redirection in quickemu
