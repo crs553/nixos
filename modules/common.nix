@@ -66,8 +66,10 @@
     wget
     ripgrep
     fzf
+    dysk
     gcc
     gnumake
+    rsync
 
     # Editors
     unstablePkgs.neovim
