@@ -59,6 +59,7 @@
     gnome-disk-utility
 
     wofi
+    bemenu
     dconf
 
     hyprpaper
