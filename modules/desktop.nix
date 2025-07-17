@@ -40,7 +40,7 @@
 
     brightnessctl
     dunst
-    swaylock
+    hyprlock
 
     # for screenshots
     grim
@@ -63,6 +63,7 @@
     dconf
 
     hyprpaper
+    hyprpicker
 
     wl-clipboard
     ];
