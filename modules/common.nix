@@ -71,6 +71,8 @@
     gnumake
     rsync
 
+    bruno #API tester
+
     # Editors
     unstablePkgs.neovim
     nodejs
