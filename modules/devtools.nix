@@ -34,19 +34,24 @@ in {
                 ps.pylint
                 ps.black
                 ps.isort
+                ps.pip
             ])
             ))
 
         # Go
         (optional cfg.enableGo gopls)
+        (optional cfg.enableGo go)
 
         # Lua
         (optional cfg.enableLua lua-language-server)
+        (optional cfg.enableLua lua)
+        (optional cfg.enableLua luaPackages.luarocks)
 
         # Rust
         (optional cfg.enableRust rust-analyzer)
         (optional cfg.enableRust unstablePkgs.rustup)
         (optional cfg.enableRust unstablePkgs.cargo)
+        (optional cfg.enableRust unstablePkgs.rustc)
 
         # Markdown
         (optional cfg.enableMarkdown marksman)

@@ -66,6 +66,7 @@
     wget
     ripgrep
     fzf
+    unzip
     dysk
     gcc
     gnumake
