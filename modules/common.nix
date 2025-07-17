@@ -72,6 +72,7 @@
     rsync
 
     bruno #API tester
+    bat
 
     # Editors
     unstablePkgs.neovim
