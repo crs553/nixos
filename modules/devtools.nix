@@ -35,6 +35,7 @@ in {
                 ps.black
                 ps.isort
                 ps.pip
+                ps.pylatexenc
             ])
             ))
 
@@ -50,8 +51,6 @@ in {
         # Rust
         (optional cfg.enableRust rust-analyzer)
         (optional cfg.enableRust unstablePkgs.rustup)
-        (optional cfg.enableRust unstablePkgs.cargo)
-        (optional cfg.enableRust unstablePkgs.rustc)
 
         # Markdown
         (optional cfg.enableMarkdown marksman)
