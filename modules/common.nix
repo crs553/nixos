@@ -1,4 +1,4 @@
-{ config, pkgs, unstablePkgs, ... }:
+{ config, pkgs, lib,unstablePkgs, ... }:
 
 {
 
@@ -42,67 +42,6 @@
 
   # Configure console keymap
   console.keyMap = "uk";
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.charlie = {
-    isNormalUser = true;
-    description = "charlie";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [ 
-      brave
-	  vlc
-	  mullvad-browser
-	  mpv
-      feh
-      starship
-    ];
-  };
-
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    btop
-    wget
-    ripgrep
-    fzf
-    unzip
-    dysk
-    gcc
-    gnumake
-    rsync
-
-    bruno #API tester
-    bat
-
-    # Editors
-    unstablePkgs.neovim
-    nodejs
-    tree-sitter
-    fd
-
-    # Virtualisation/VMs
-    unstablePkgs.quickemu
-    unstablePkgs.spice-gtk
-
-    # Messaging
-    unstablePkgs.signal-desktop
-
-    # Teaching
-    unstablePkgs.openboard
-
-    # Markdown
-    unstablePkgs.marp-cli
-    unstablePkgs.pandoc
-    unstablePkgs.texliveSmall
-
-    unstablePkgs.ladybird
-
-    unstablePkgs.yt-dlp
-    mpv
-
-  ];
-
   # Used for spice usb redirection in quickemu
   virtualisation.spiceUSBRedirection.enable = true;
 
@@ -186,5 +125,71 @@
     enableHarper = true;
     enableNix = true;
   };
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.charlie = {
+    isNormalUser = true;
+    description = "charlie";
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [ 
+	  vlc
+	  mullvad-browser
+	  mpv
+      feh
+      starship
+    ];
+  };
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    btop
+    wget
+    ripgrep
+    fzf
+    unzip
+    dysk
+    gcc
+    gnumake
+    rsync
+
+    bat
+
+    # Editors
+    unstablePkgs.neovim
+    nodejs
+    tree-sitter
+    fd
+
+    # Virtualisation/VMs
+    unstablePkgs.quickemu
+    unstablePkgs.spice-gtk
+
+    # Teaching
+    unstablePkgs.openboard
+
+    # Markdown
+    unstablePkgs.marp-cli
+    unstablePkgs.pandoc
+    unstablePkgs.texliveSmall
+
+    unstablePkgs.signal-desktop
+    brave
+
+    unstablePkgs.yt-dlp
+    mpv
+
+  ];
+
+  services.flatpak.remotes = [
+  {
+      name = "flathub";
+      location = "https://flathub.org/repo/flathub.flatpakrepo";
+  }
+  ];
+
+  services.flatpak.packages = [
+      { appId = "com.usebruno.Bruno"; origin = "flathub"; }
+  ];
 
 }
