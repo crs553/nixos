@@ -190,6 +190,8 @@
 
   services.flatpak.packages = [
       { appId = "com.usebruno.Bruno"; origin = "flathub"; }
+      { appId = "org.onlyoffice.desktopeditors"; origin = "flathub"; }
+      { appId = "org.qbittorrent.qBittorrent"; origin = "flathub"; }
   ];
 
 }
