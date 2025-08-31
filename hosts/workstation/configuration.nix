@@ -11,6 +11,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+    ### added as test 
+    hardware.enableRedistributableFirmware = true;
+
   networking.hostName = "workstation"; # Define your hostname.
 
    # Enable OpenGL
