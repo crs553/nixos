@@ -1,4 +1,3 @@
-
 {
   description = "My NixOS general work configuration";
 
@@ -14,9 +13,17 @@
         url = "github:nix-community/home-manager/release-25.05";
         inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # NixVim plugin
+    nixvim = {
+        # url = "github:nix-community/nixvim";
+        # If using a stable channel you can use:
+        url = "github:nix-community/nixvim/nixos-25.05"
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixos-unstable, nix-flatpak, ... }:
+  outputs = inputs@{ self, nixpkgs, nixos-unstable, nix-flatpak, nixvim, ... }:
     let
       system = "x86_64-linux";
       defaultHost = "workstation";
@@ -31,11 +38,12 @@
           "${modulesDir}/common.nix"
           "${modulesDir}/desktop.nix"
           "${modulesDir}/devtools.nix"
+          "${modulesDir}/nixvim.nix"
           "${modulesDir}/gaming.nix"
 
           # Include nix-flatpak module
           nix-flatpak.nixosModules.nix-flatpak
-          
+
           # Integrate Home Manager as a NixOS module
           inputs.home-manager.nixosModules.home-manager
           {
@@ -45,6 +53,9 @@
             home-manager.users.charlie = import ./home.nix;
           }
 
+          # Optional: include nixvim as a module if needed
+          # nixvim.nixosModules.nixvim
+          
           # global system version
           { system.stateVersion = "25.05"; }
         ];
@@ -66,4 +77,3 @@
         self.nixosConfigurations.${defaultHost}.config.system.build.toplevel;
     };
 }
-
