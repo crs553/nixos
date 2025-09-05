@@ -8,7 +8,8 @@
 
   imports = [
     inputs.nixvim.homeModules.nixvim
-    "./nixvim/default.nix"
+
+    ./nixvim/default.nix
   ];
 }
 

@@ -2,19 +2,10 @@
 { config, pkgs, ... }:
 
 {
-  ##########################################################################
-  # ENABLE nixvim
-  ##########################################################################
   programs.nixvim.enable = true;
 
-  ##########################################################################
-  # OPTIONAL: make Neovim the default editor for the user
-  ##########################################################################
   programs.nixvim.defaultEditor = true;
 
-  ##########################################################################
-  # CORE Neovim options (equivalent to `:set` commands)
-  ##########################################################################
   programs.nixvim.opts = {
     number          = true;          # absolute line numbers
     relativenumber  = true;          # relative numbers
@@ -22,15 +13,43 @@
     termguicolors   = true;          # needed for most colour schemes
   };
 
-  ##########################################################################
-  # Clipboard configuration
-  ##########################################################################
   programs.nixvim.clipboard.register = "unnamedplus";
 
-  ##########################################################################
-  # COLOURSCHEME – Catppuccin (you can swap this for any other)
-  ##########################################################################
-  programs.nixvim.colorschemes.catppuccin.enable = true;
+  programs.nixvim.colorschemes.catppuccin.settings = {
+    enable = true;
+    flavour = "mocha";
+
+    transparentBackground = false;
+
+    styles = {
+      comments    = [ "italic" ];
+      conditionals = [ "italic" ];
+    };
+
+    # --------------------------------------------------------------------
+    # Integrations – enable Tree‑sitter and native LSP support
+    # --------------------------------------------------------------------
+    integrations = {
+      cmp = true;
+      treesitter = true;
+      native_lsp = {
+        enabled = true;
+      };
+    };
+
+    # --------------------------------------------------------------------
+    # Custom highlight overrides – exactly the three groups you listed
+    # --------------------------------------------------------------------
+    #customHighlights = colors: {
+    #  LineNr       = { fg = colors.overlay1; };
+    #  CursorLineNr = {
+    #    fg    = colors.pink;
+    #    style = [ "bold" ];
+    #  };
+    #  CursorLine   = { bg = colors.surface0; };
+    #};
+  };
+  
 
   ##########################################################################
   # PLUGINS (optional – add whatever you like)

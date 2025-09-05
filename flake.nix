@@ -72,6 +72,16 @@
         laptop = mkHost "laptop";
         workstation = mkHost "workstation";
       };
+      homeConfigurations.charlie = home-manager.lib.homeManagerConfiguration {
+        inherit system;
+        pkgs = import nixpkgs { inherit system; };
+        modules = [
+          ./home.nix
+        ];
+        # expose the nixvim input so home.nix can use it
+        extraSpecialArgs = { inherit nixvim; };
+      };
+
 
       defaultPackage.${system} =
         self.nixosConfigurations.${defaultHost}.config.system.build.toplevel;
