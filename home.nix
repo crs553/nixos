@@ -13,11 +13,7 @@
     vimAlias = true;
     withNodeJs = true;
     withPython3 = true;
-    extraConfig = ''
-      set number
-      set relativenumber
-      syntax on
-    '';
+    extraConfig = builtins.readFile ./nvim/option.lua;
   };
 
   home.stateVersion = "25.05";  # match your NixOS version
