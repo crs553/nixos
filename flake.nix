@@ -18,12 +18,12 @@
     nixvim = {
         # url = "github:nix-community/nixvim";
         # If using a stable channel you can use:
-        url = "github:nix-community/nixvim/nixos-25.05"
+        url = "github:nix-community/nixvim/nixos-25.05";
         inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixos-unstable, nix-flatpak, nixvim, ... }:
+  outputs = inputs@{ self, nixpkgs, nixos-unstable, nix-flatpak, nixvim, home-manager, ... }:
     let
       system = "x86_64-linux";
       defaultHost = "workstation";
@@ -38,18 +38,17 @@
           "${modulesDir}/common.nix"
           "${modulesDir}/desktop.nix"
           "${modulesDir}/devtools.nix"
-          "${modulesDir}/nixvim.nix"
           "${modulesDir}/gaming.nix"
 
           # Include nix-flatpak module
           nix-flatpak.nixosModules.nix-flatpak
 
-          # Integrate Home Manager as a NixOS module
-          inputs.home-manager.nixosModules.home-manager
+	  # Home Manager as a NixOS module
+          home-manager.nixosModules.home-manager
           {
             home-manager.useUserPackages = true;
 
-            # Define user configs here (points to home.nix)
+            # Per‑user Home Manager configuration
             home-manager.users.charlie = import ./home.nix;
           }
 
