@@ -49,7 +49,7 @@
             home-manager.useUserPackages = true;
 	    home-manager.extraSpecialArgs = {inherit inputs;};
             # Per‑user Home Manager configuration
-            home-manager.users.charlie = import ./home-manager;
+            home-manager.users.charlie = import ./home.nix;
           }
 
           # Optional: include nixvim as a module if needed
