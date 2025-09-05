@@ -47,9 +47,9 @@
           home-manager.nixosModules.home-manager
           {
             home-manager.useUserPackages = true;
-
+	    home-manager.extraSpecialArgs = {inherit inputs;};
             # Per‑user Home Manager configuration
-            home-manager.users.charlie = import ./home.nix;
+            home-manager.users.charlie = import ./home-manager;
           }
 
           # Optional: include nixvim as a module if needed
@@ -63,6 +63,7 @@
           unstablePkgs = import nixos-unstable {
             inherit system;
             config.allowUnfree = true;
+
           };
         };
       };
