@@ -8,6 +8,12 @@
 
     # Add nix-flatpak from unstable branch (optionally pin it)
     nix-flatpak.url = "github:gmodena/nix-flatpak";
+
+    # Home manager
+    home-manager = {
+        url = "github:nix-community/home-manager";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, nixos-unstable, nix-flatpak, ... }:
@@ -29,6 +35,15 @@
 
           # Include nix-flatpak module
           nix-flatpak.nixosModules.nix-flatpak
+          
+          # Integrate Home Manager as a NixOS module
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager.useUserPackages = true;
+
+            # Define user configs here (points to home.nix)
+            home-manager.users.myuser = import ./home.nix;
+          }
 
           # global system version
           { system.stateVersion = "25.05"; }

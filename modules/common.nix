@@ -156,7 +156,7 @@
     bat
 
     # Editors
-    unstablePkgs.neovim
+    # unstablePkgs.neovim
     nodejs
     tree-sitter
     fd
