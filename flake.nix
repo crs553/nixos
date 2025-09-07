@@ -39,6 +39,9 @@
           "${modulesDir}/desktop.nix"
           "${modulesDir}/devtools.nix"
           "${modulesDir}/gaming.nix"
+          nixvim.nixosModules.nixvim
+          "${modulesDir}/nixvim.nix"
+          
 
           # Include nix-flatpak module
           nix-flatpak.nixosModules.nix-flatpak
@@ -52,9 +55,6 @@
             home-manager.users.charlie = import ./home.nix;
           }
 
-          # Optional: include nixvim as a module if needed
-          # nixvim.nixosModules.nixvim
-          
           # global system version
           { system.stateVersion = "25.05"; }
         ];
@@ -78,8 +78,6 @@
         modules = [
           ./home.nix
         ];
-        # expose the nixvim input so home.nix can use it
-        extraSpecialArgs = { inherit nixvim; };
       };
 
 
