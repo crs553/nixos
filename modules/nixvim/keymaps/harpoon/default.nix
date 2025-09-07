@@ -1,4 +1,3 @@
-[
 ## Harpoon maps
 {
 	mode    = "n";
@@ -15,7 +14,7 @@
 {
 	mode    = "n";
 	key     = "<C-e>";
-	action  = ''lua require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())'';
+	action  = ''lua require'harpoon'.ui:toggle_quick_menu(require'harpoon':list())'';
 	options = { noremap = true; silent = true; };
 }
 {

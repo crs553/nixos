@@ -31,10 +31,7 @@ in
       colorschemes.catppuccin.enable = true;
       plugins.harpoon = {
         enable = true;
-	settings = {
-	  save_on_toggle = true;
-          sync_on_ui_close = false;
-	};
+	enableTelescope = false;
       };
       plugins.lualine.enable = true;
       plugins.oil.enable = true;
@@ -57,12 +54,30 @@ in
       };
 
       plugins.fugitive.enable = true;
-
-      extraConfigLuaPre = ''
-        -- Set the global (and optional local) leader to a single space.
-        vim.g.mapleader = " "
-        vim.g.maplocalleader = " "
-      '';
+      
+      globals = {
+        localleader = " ";
+	mapleader = " ";
+      };
+      opts = {
+	      number          = true;                     # absolute line numbers
+	      relativenumber  = true;                     # relative to the cursor
+	      clipboard       = "unnamedplus";            # use system clipboard for all ops
+	      syntax          = "on";                     # enable syntax highlighting
+	      autoindent      = true;                     # copy indent from current line
+	      expandtab       = true;                     # insert spaces instead of tabs
+	      shiftwidth      = 4;                        # spaces per indent step
+	      tabstop         = 4;                        # visual width of a tab character
+	      cursorline      = true;                     # highlight the line the cursor is on
+	      ruler           = true;                     # show line & col in the status line
+	      title           = true;                     # set window title from 'titlestring'
+	      hidden          = true;                     # allow abandoning buffers without saving
+	      wildmenu        = true;                     # enhanced command‑line completion UI
+	      showcmd         = true;                     # echo partial commands in the last line
+	      showmatch       = true;                     # briefly jump to matching bracket
+	      inccommand      = "split";                  # preview :substitute etc. in a split
+	      wrap            = true;                     # wrap long lines visually
+      };
 
       keymaps = [
         # Oil file browser
@@ -94,19 +109,19 @@ in
 
 	## toggleterm
 	{
-		mode    = "n";
-		key     = "<M-i>";
-		action  = "lua require('toggleterm').toggle()";
-		options = { noremap = true; silent = true; };
+	  mode    = "n";
+	  key     = "<M-i>";
+	  action  = "function() require('toggleterm').toggle() end";
+	  options = { noremap = true; silent = true; };
 	}
 	{
-		mode    = "t";
-		key     = "<M-i>";
-		action  = "lua require('toggleterm').toggle()";
-		options = { noremap = true; silent = true; };
+	  mode    = "t";
+	  key     = "<M-i>";
+	  action  = "function() require('toggleterm').toggle() end";
+	  options = { noremap = true; silent = true; };
 	}
-      ]
-      ++ import ./modules/nixvim/keymaps/harpoon;
+      
+      ++ import ./nixvim/keymaps/harpoon;
       # ---------------------------------------------------------------
       # Load any existing after/ftplugin/*.lua files from your config
       # ---------------------------------------------------------------
