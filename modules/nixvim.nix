@@ -106,7 +106,7 @@ in
 		options = { noremap = true; silent = true; };
 	}
       ]
-      ++ import ./nixvim/keymaps/harpoon;
+      ++ import ./modules/nixvim/keymaps/harpoon;
       # ---------------------------------------------------------------
       # Load any existing after/ftplugin/*.lua files from your config
       # ---------------------------------------------------------------
