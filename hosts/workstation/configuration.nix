@@ -56,4 +56,6 @@
   };
 
   gaming.enableSteam = true;
+  nixvim.enable = true;
+
 }

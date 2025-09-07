@@ -1,41 +1,37 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
+let
+  mkEnableOption = lib.mkEnableOption;
+in
 {
-  programs.nixvim = {
-    enable = true;
+  ##########################################################################
+  ## 1️⃣ Public switch – turn the whole block on/off
+  ##########################################################################
+  options.nixvim = {
+    enable = mkEnableOption "Enable the minimal NixVim configuration";
+  };
 
-    options = {
-      number = true;
-      relativenumber = true;
-      tabstop = 4;
-      shiftwidth = 4;
-      expandtab = true;
-    };
+  ##########################################################################
+  ## 2️⃣ Pull in the upstream NixVim module (the real implementation)
+  ##########################################################################
+  imports = [
+    inputs.nixvim.nixosModules.nixvim
+  ];
 
-    colorscheme = "gruvbox";
+  ##########################################################################
+  ## 3️⃣ Only evaluate the body when the user actually enables it
+  ##########################################################################
+  config = lib.mkIf config.nixvim.enable {
+    ######################################################################
+    ## 4️⃣ Minimal Neovim configuration – same on every host
+    ######################################################################
+    programs.nixvim = {
+      enable = true;
 
-    plugins = {
-      treesitter.enable = true;
-      telescope.enable = true;
-      lualine.enable = true;
-
-      # LSP + completion
-      lsp = {
-        enable = true;
-        servers = {
-          lua_ls.enable = true;
-          pyright.enable = true;
-          rust_analyzer.enable = true;
-        };
-      };
-
-      cmp = {
-        enable = true;
-        sources = [ "nvim_lsp" "buffer" "path" "luasnip" ];
-      };
-
-      luasnip.enable = true;
+      colorschemes.catppuccin.enable = true;
+      plugins.lualine.enable = true;
+      plugins.oil.enable = true;
+      plugins.smear.enable = true;
     };
   };
 }
-
