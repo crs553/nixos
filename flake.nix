@@ -19,11 +19,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # NixVim – pinned to the same NixOS version as the rest of the system
-    nixvim = {
-      url = "github:nix-community/nixvim/nixos-25.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   # ----------------------------------------------------------------------
@@ -34,7 +29,6 @@
     nixpkgs,
     nixos-unstable,
     nix-flatpak,
-    nixvim,
     home-manager,
     ...
   }:
@@ -61,9 +55,6 @@
           "${modulesDir}/devtools.nix"
           "${modulesDir}/gaming.nix"
 
-          # NixVim (upstream module) + our thin wrapper
-          "${modulesDir}/nixvim.nix"
-
           # Flatpak support
           nix-flatpak.nixosModules.nix-flatpak
 
@@ -83,9 +74,6 @@
         # Special arguments that are visible to *all* modules
         # ----------------------------------------------------------------
         specialArgs = {
-          # Give every module access to the whole `inputs` set (needed by our
-          # nixvim wrapper to reach `inputs.nixvim`).
-          inherit inputs;
 
           # Provide the unstable package set for any module that wants it.
           unstablePkgs = import nixos-unstable {
