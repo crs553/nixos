@@ -19,6 +19,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixvim = {
+      url = "github:crs553/nixvim-flake";
+    };
   };
 
   # ----------------------------------------------------------------------
@@ -30,6 +33,7 @@
     nixos-unstable,
     nix-flatpak,
     home-manager,
+    nixvim,
     ...
   }:
     let
@@ -80,6 +84,8 @@
             inherit system;
             config.allowUnfree = true;
           };
+		  
+	  nixvim = inputs.nixvim;
         };
       };
     in
