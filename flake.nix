@@ -58,6 +58,7 @@
           "${modulesDir}/desktop.nix"
           "${modulesDir}/devtools.nix"
           "${modulesDir}/gaming.nix"
+          "${modulesDir}/nixvim.nix"
 
           # Flatpak support
           nix-flatpak.nixosModules.nix-flatpak
@@ -85,7 +86,7 @@
             config.allowUnfree = true;
           };
 		  
-	  nixvim = inputs.nixvim;
+	      inherit inputs;
         };
       };
     in
