@@ -27,15 +27,16 @@
   # ----------------------------------------------------------------------
   # OUTPUTS
   # ----------------------------------------------------------------------
-  outputs = inputs@{
-    self,
-    nixpkgs,
-    nixos-unstable,
-    nix-flatpak,
-    home-manager,
-    nixvim,
-    ...
-  }:
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      nixos-unstable,
+      nix-flatpak,
+      home-manager,
+      nixvim,
+      ...
+    }:
     let
       system = "x86_64-linux";
       defaultHost = "workstation";
@@ -46,57 +47,60 @@
       # ------------------------------------------------------------------
       # Helper to build a host configuration
       # ------------------------------------------------------------------
-      mkHost = hostName: nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          # Host‑specific configuration
-          ./hosts/${hostName}/configuration.nix
+      mkHost =
+        hostName:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            # Host‑specific configuration
+            ./hosts/${hostName}/configuration.nix
 
-          # Global modules
-          /etc/nixos/luks.nix
-          "${modulesDir}/common.nix"
-          "${modulesDir}/desktop.nix"
-          "${modulesDir}/devtools.nix"
-          "${modulesDir}/gaming.nix"
-          "${modulesDir}/nixvim.nix"
+            # Global modules
+            /etc/nixos/luks.nix
+            "${modulesDir}/common.nix"
+            "${modulesDir}/desktop.nix"
+            "${modulesDir}/devtools.nix"
+            "${modulesDir}/gaming.nix"
+            "${modulesDir}/nixvim.nix"
 
-          # Flatpak support
-          nix-flatpak.nixosModules.nix-flatpak
+            # Flatpak support
+            nix-flatpak.nixosModules.nix-flatpak
 
-          # Home Manager as a NixOS module
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.charlie = import ./home.nix;
-          }
+            # Home Manager as a NixOS module
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.users.charlie = import ./home.nix;
+            }
 
-          # Global system version
-          { system.stateVersion = "25.05"; }
-        ];
+            # Global system version
+            { system.stateVersion = "25.05"; }
+          ];
 
-        # ----------------------------------------------------------------
-        # Special arguments that are visible to *all* modules
-        # ----------------------------------------------------------------
-        specialArgs = {
+          # ----------------------------------------------------------------
+          # Special arguments that are visible to *all* modules
+          # ----------------------------------------------------------------
+          specialArgs = {
 
-          # Provide the unstable package set for any module that wants it.
-          unstablePkgs = import nixos-unstable {
-            inherit system;
-            config.allowUnfree = true;
+            # Provide the unstable package set for any module that wants it.
+            unstablePkgs = import nixos-unstable {
+              inherit system;
+              config.allowUnfree = true;
+            };
+
+            inherit inputs;
           };
-		  
-	      inherit inputs;
         };
-      };
     in
     {
       # ------------------------------------------------------------------
       # NixOS configurations (machines)
       # ------------------------------------------------------------------
       nixosConfigurations = {
-        laptop     = mkHost "laptop";
+        laptop = mkHost "laptop";
         workstation = mkHost "workstation";
+        pocket = mkHost "pocket";
       };
 
       # ------------------------------------------------------------------
@@ -111,7 +115,6 @@
       # ------------------------------------------------------------------
       # Default package (so `nix build .#` works)
       # ------------------------------------------------------------------
-      defaultPackage.${system} =
-        self.nixosConfigurations.${defaultHost}.config.system.build.toplevel;
+      defaultPackage.${system} = self.nixosConfigurations.${defaultHost}.config.system.build.toplevel;
     };
 }
