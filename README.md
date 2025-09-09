@@ -1,13 +1,8 @@
-Got it! Here's a complete example `README.md` you can place at the root of your NixOS flake repository. It documents the project purpose, structure, how to build/deploy, and what should be in files like `luks.nix` and `hardware-configuration.nix`.
-
----
-
-## 📘 `README.md`
-
-````markdown
 # 🧊 NixOS Multi-Host Flake Configuration
 
-This repository provides a **single flake-based configuration** for managing multiple NixOS machines, such as a laptop and a workstation, with shared modules for desktop setup and LUKS encryption.
+This repository provides a **single flake-based configuration**.
+It isfor managing multiple NixOS machines, such as a laptop and a workstation,
+with shared modules for desktop setup and LUKS encryption.
 
 ## 📁 Project Structure
 
@@ -42,8 +37,10 @@ cd nixos-flake
 
 Replace `workstation` with your hostname as needed:
 
+I use impure right now as I haven not yet setup secretes.
+
 ```bash
-sudo nixos-rebuild switch --flake .#workstation
+sudo nixos-rebuild switch --flake .#workstation --impure
 ```
 
 ### 🏗️ Build the system without switching:
@@ -75,27 +72,6 @@ You should move your LUKS setup from host configs into this shared module. Examp
 
 ## 💻 Example: `hosts/workstation/hardware-configuration.nix`
 
-This file is **generated** by the `nixos-generate-config` tool and is hardware-specific. 
+This file is **generated** by the `nixos-generate-config` tool and is hardware-specific.
 
 > This is necessary for booting. If you're publishing this repo publicly, consider `.gitignore`-ing or sanitizing UUIDs.
-
----
-
-## ❓ FAQ
-
-### Should I share `hardware-configuration.nix`?
-
-Generally yes — it's necessary for a working system rebuild. But if you’re publishing to GitHub, **remove or redact UUIDs**, or exclude it with `.gitignore`.
-
-### Do I need `home-manager`?
-
-No. This flake is for system configuration only. If you want per-user dotfiles and programs, you can add `home-manager` later.
-
----
-
-## 📦 Requirements
-
-* Nix >= 2.15 with flakes enabled
-* NixOS 25.05 or compatible
-* Root access for rebuilds
-
