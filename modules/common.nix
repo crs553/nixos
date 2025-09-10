@@ -1,10 +1,19 @@
-{ config, pkgs, lib,unstablePkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  unstablePkgs,
+  ...
+}:
 
 {
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   time.timeZone = "Europe/London";
 
   # Bootloader.
@@ -16,7 +25,6 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
@@ -44,7 +52,6 @@
   # Used for spice usb redirection in quickemu
   virtualisation.spiceUSBRedirection.enable = true;
 
-
   ### TAILSCALE ###
   services.resolved.enable = true;
   services.tailscale.enable = true;
@@ -58,13 +65,12 @@
   # KDE Connect
   programs.kdeconnect.enable = true;
 
-
   fonts.packages = with pkgs; [
-      font-awesome
-      powerline-fonts
-      powerline-symbols
-      nerd-fonts._0xproto
-      nerd-fonts.droid-sans-mono
+    font-awesome
+    powerline-fonts
+    powerline-symbols
+    nerd-fonts._0xproto
+    nerd-fonts.droid-sans-mono
   ];
 
   # Enable CUPS to print documents.
@@ -129,11 +135,14 @@
   users.users.charlie = {
     isNormalUser = true;
     description = "charlie";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [ 
-	  vlc
-	  mullvad-browser
-	  mpv
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+    packages = with pkgs; [
+      vlc
+      mullvad-browser
+      mpv
       feh
       starship
     ];
@@ -151,6 +160,7 @@
     gcc
     gnumake
     rsync
+    tmux
 
     bat
 
@@ -181,16 +191,25 @@
   ];
 
   services.flatpak.remotes = [
-  {
+    {
       name = "flathub";
       location = "https://flathub.org/repo/flathub.flatpakrepo";
-  }
+    }
   ];
 
   services.flatpak.packages = [
-      { appId = "com.usebruno.Bruno"; origin = "flathub"; }
-      { appId = "org.onlyoffice.desktopeditors"; origin = "flathub"; }
-      { appId = "org.qbittorrent.qBittorrent"; origin = "flathub"; }
+    {
+      appId = "com.usebruno.Bruno";
+      origin = "flathub";
+    }
+    {
+      appId = "org.onlyoffice.desktopeditors";
+      origin = "flathub";
+    }
+    {
+      appId = "org.qbittorrent.qBittorrent";
+      origin = "flathub";
+    }
   ];
 
 }
