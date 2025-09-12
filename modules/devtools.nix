@@ -1,11 +1,19 @@
-{ config, lib, pkgs, unstablePkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  unstablePkgs,
+  ...
+}:
 
 with lib;
 
 let
-  cfg = config.devtools;  # Changed from lsp to devtools
-in {
-  options.devtools = {  # Changed from lsp to devtools
+  cfg = config.devtools; # Changed from lsp to devtools
+in
+{
+  options.devtools = {
+    # Changed from lsp to devtools
     enableGit = mkEnableOption "Enable Git devtools";
     enableBash = mkEnableOption "Enable Bash devtools";
     enablePython = mkEnableOption "Enable Python tools (pylsp, pylint, black, python)";
@@ -18,51 +26,54 @@ in {
   };
 
   config = {
-    environment.systemPackages = with pkgs; lib.optionals true (
-      lib.flatten [
+    environment.systemPackages =
+      with pkgs;
+      lib.optionals true (
+        lib.flatten [
 
-        # Git
-        (optional cfg.enableGit git)
+          # Git
+          (optional cfg.enableGit git)
 
-        # Bash
-        (optional cfg.enableBash bash-language-server)
+          # Bash
+          (optional cfg.enableBash bash-language-server)
 
-        # Python
-        (optional cfg.enablePython (
+          # Python
+          (optional cfg.enablePython (
             pkgs.python3.withPackages (ps: [
-                ps.python-lsp-server
-                ps.pylint
-                ps.black
-                ps.isort
-                ps.pip
-                ps.pylatexenc
+              ps.python-lsp-server
+              ps.pylint
+              ps.black
+              ps.isort
+              ps.pip
+              ps.pylatexenc
+              ps.mypy
+              ps.black
             ])
-            ))
+          ))
 
-        # Go
-        (optional cfg.enableGo gopls)
-        (optional cfg.enableGo go)
+          # Go
+          (optional cfg.enableGo gopls)
+          (optional cfg.enableGo go)
 
-        # Lua
-        (optional cfg.enableLua lua-language-server)
-        (optional cfg.enableLua lua)
-        (optional cfg.enableLua luaPackages.luarocks)
+          # Lua
+          (optional cfg.enableLua lua-language-server)
+          (optional cfg.enableLua lua)
+          (optional cfg.enableLua luaPackages.luarocks)
 
-        # Rust
-        (optional cfg.enableRust rust-analyzer)
-        (optional cfg.enableRust unstablePkgs.rustup)
+          # Rust
+          (optional cfg.enableRust rust-analyzer)
+          (optional cfg.enableRust unstablePkgs.rustup)
 
-        # Markdown
-        (optional cfg.enableMarkdown marksman)
-        (optional cfg.enableMarkdown markdownlint-cli)
+          # Markdown
+          (optional cfg.enableMarkdown marksman)
+          (optional cfg.enableMarkdown markdownlint-cli)
 
-        # HarperDB
-        (optional cfg.enableHarper harper)
+          # HarperDB
+          (optional cfg.enableHarper harper)
 
-        # Nix
-        (optional cfg.enableNix nixd)
-      ]
-    );
+          # Nix
+          (optional cfg.enableNix nixd)
+        ]
+      );
   };
 }
-
