@@ -23,6 +23,7 @@ in
     enableMarkdown = mkEnableOption "Enable Markdown devtools (marksman, markdownlint)";
     enableHarper = mkEnableOption "Enable HarperDB devtools";
     enableNix = mkEnableOption "Enable Nix devtools (nixd)";
+    enableRemoteDesktop = mkEnableOption "Enable remote desktop tools";
   };
 
   config = {
@@ -73,6 +74,8 @@ in
 
           # Nix
           (optional cfg.enableNix nixd)
+
+          (optional cfg.enableRemoteDesktop remmina)
         ]
       );
   };

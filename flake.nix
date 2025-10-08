@@ -62,6 +62,7 @@
             "${modulesDir}/devtools.nix"
             "${modulesDir}/gaming.nix"
             "${modulesDir}/nixvim.nix"
+            "${modulesDir}/docker.nix"
 
             # Flatpak support
             nix-flatpak.nixosModules.nix-flatpak

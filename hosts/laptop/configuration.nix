@@ -1,9 +1,9 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      /etc/nixos/hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    /etc/nixos/hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -28,9 +28,9 @@
       CPU_MIN_PERF_ON_BAT = 0;
       CPU_MAX_PERF_ON_BAT = 20;
 
-     #Optional helps save long term battery health
-     START_CHARGE_THRESH_BAT0 = 40; # 40 and below it starts to charge
-     STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
+      #Optional helps save long term battery health
+      START_CHARGE_THRESH_BAT0 = 40; # 40 and below it starts to charge
+      STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
 
     };
   };
@@ -41,8 +41,9 @@
       intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
     };
   };
-  
-  hardware.graphics = { # hardware.graphics on unstable
+
+  hardware.graphics = {
+    # hardware.graphics on unstable
     enable = true;
     extraPackages = with pkgs; [
       intel-media-driver # LIBVA_DRIVER_NAME=iHD
@@ -51,5 +52,11 @@
     ];
   };
 
-  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "iHD";
+  }; # Force intel-media-driver
+  docker.enableDocker = true;
+  devtools = {
+    enableRemoteDesktop = true;
+  };
 }
