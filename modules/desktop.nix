@@ -1,10 +1,13 @@
-{config, pkgs, ...}:
+{ config, pkgs, ... }:
 {
   services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    theme = "catppuccin-mocha";
+    package = pkgs.kdePackages.sddm;
+  };
   #services.displayManager.defaultSession = "hyprland";
   services.displayManager.defaultSession = "hyprland-uwsm";
-
 
   programs.hyprland = {
     enable = true;
@@ -28,8 +31,8 @@
     xdg-desktop-portal-wlr
     xdg-desktop-portal-gtk
   ];
-  
-  networking.networkmanager.enable=true;
+
+  networking.networkmanager.enable = true;
 
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.gdm.enableGnomeKeyring = true;
@@ -66,5 +69,8 @@
     hyprpicker
 
     wl-clipboard
-    ];
-  }
+    (catppuccin-sddm.override {
+      flavor = "mocha";
+    })
+  ];
+}
