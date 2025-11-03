@@ -44,6 +44,7 @@
     brightnessctl
     dunst
     hyprlock
+    hyprcursor
 
     # for screenshots
     grim
