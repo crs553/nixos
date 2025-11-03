@@ -136,6 +136,7 @@
   users.extraUsers.charlie = {
     shell = pkgs.zsh;
   };
+  environment.variables.ZDOTDIR = "$HOME/.config/zsh/.zshrc";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.charlie = {
@@ -193,6 +194,9 @@
 
     unstablePkgs.yt-dlp
     mpv
+
+    #pdf
+    zathura
 
   ];
 
