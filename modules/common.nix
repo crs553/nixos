@@ -136,7 +136,7 @@
   users.extraUsers.charlie = {
     shell = pkgs.zsh;
   };
-  environment.variables.ZDOTDIR = "$HOME/.config/zsh/.zshrc";
+  environment.variables.ZDOTDIR = "$HOME/.config/zsh";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.charlie = {
