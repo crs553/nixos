@@ -9,6 +9,7 @@
 {
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelModules = [ "sg" ]; # For makemkv
 
   nix.settings.experimental-features = [
     "nix-command"
@@ -145,6 +146,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "cdrom"
     ];
     packages = with pkgs; [
       vlc
@@ -194,6 +196,8 @@
 
     unstablePkgs.yt-dlp
     mpv
+    unstablePkgs.makemkv
+    unstablePkgs.handbrake
 
     #pdf
     zathura
@@ -221,5 +225,18 @@
       origin = "flathub";
     }
   ];
+
+  fileSystems."/mnt/media" = {
+    device = "192.168.1.145:/media";
+    fsType = "nfs";
+    options = [
+      "rw"
+      "hard"
+      "intr"
+      "nolock"
+      "uid=1000" # Replace 1000 with your user ID (charlie)
+      "gid=100" # Replace 100 with your group ID (e.g., users)
+    ];
+  };
 
 }
