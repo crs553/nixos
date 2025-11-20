@@ -7,10 +7,6 @@
     /etc/nixos/hardware-configuration.nix
   ];
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   ### added as test
   hardware.enableRedistributableFirmware = true;
 
@@ -58,4 +54,16 @@
 
   gaming.enableSteam = true;
 
+  fileSystems."/mnt/media" = {
+    device = "192.168.1.145:/media";
+    fsType = "nfs";
+    options = [
+      "rw"
+      "hard"
+      "intr"
+      "nolock"
+      "uid=1000" # Replace 1000 with your user ID (charlie)
+      "gid=100" # Replace 100 with your group ID (e.g., users)
+    ];
+  };
 }

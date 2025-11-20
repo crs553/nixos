@@ -7,29 +7,15 @@
 }:
 
 {
-  # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelModules = [ "sg" ]; # For makemkv
+  ##############################################################################
+  # Basic system settings
+  ##############################################################################
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  # Timezone
   time.timeZone = "Europe/London";
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Select internationalisation properties.
+  # Locale settings
   i18n.defaultLocale = "en_GB.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_GB.UTF-8";
     LC_IDENTIFICATION = "en_GB.UTF-8";
@@ -42,104 +28,98 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
-  # Configure keymap in X11
+  # Keymaps
+  console.keyMap = "uk";
   services.xserver.xkb = {
     layout = "gb";
     variant = "";
   };
 
-  # Configure console keymap
-  console.keyMap = "uk";
-  # Used for spice usb redirection in quickemu
-  virtualisation.spiceUSBRedirection.enable = true;
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 
-  ### TAILSCALE ###
-  services.resolved.enable = true;
-  services.tailscale.enable = true;
-  services.tailscale.useRoutingFeatures = "client";
-  services.mullvad-vpn.enable = true;
-  services.mullvad-vpn.package = pkgs.mullvad-vpn;
-
-  # ZOXIDE
-  programs.zoxide.enable = true;
-
-  # KDE Connect
-  programs.kdeconnect.enable = true;
-
-  fonts.packages = with pkgs; [
-    font-awesome
-    powerline-fonts
-    powerline-symbols
-    nerd-fonts._0xproto
-    nerd-fonts.droid-sans-mono
+  # Enable experimental features
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
   ];
 
-  # Enable CUPS to print documents.
-  #services.printing.enable = true;
+  ##############################################################################
+  # Boot & kernel
+  ##############################################################################
 
-  services.flatpak.enable = true;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    kernelModules = [ "sg" ]; # For MakeMKV
+    # Bootloader
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+    plymouth = {
+      enable = true;
+      theme = "rings";
+      themePackages = with pkgs; [
+        # By default we would install all themes
+        (adi1090x-plymouth-themes.override {
+          selected_themes = [ "rings" ];
+        })
+      ];
+    };
 
-  security.polkit.enable = true;
+    # Enable "Silent boot"
+    consoleLogLevel = 3;
+    initrd.verbose = false;
+    kernelParams = [
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "udev.log_priority=3"
+      "rd.systemd.show_status=auto"
+    ];
+    # Hide the OS choice for bootloaders.
+    # It's still possible to open the bootloader list by pressing any key
+    # It will just not appear on screen unless a key is pressed
+    loader.timeout = 0;
+  };
 
-  # Enable Bluetooth
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
-  #hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
-  services.blueman.enable = true;
-  hardware.opentabletdriver.enable = true;
+  ##############################################################################
+  # Networking & firewall
+  ##############################################################################
 
-  # Drives
-  services.devmon.enable = true;
-  services.gvfs.enable = true;
-  services.udisks2.enable = true;
+  networking.networkmanager.enable = true;
 
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
+  networking.firewall = {
     enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
+    allowedTCPPorts = [
+      80
+      443
+      53317
+    ]; # 53317 for LocalSend
+    allowedUDPPortRanges = [
+      {
+        from = 4000;
+        to = 4007;
+      }
+      {
+        from = 53315;
+        to = 53318;
+      }
+      {
+        from = 8000;
+        to = 8010;
+      }
+    ];
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  ##############################################################################
+  # Users & shells
+  ##############################################################################
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
-  # Language support
-  devtools = {
-    enableGit = true;
-    enableBash = true;
-    enablePython = true;
-    enableGo = true;
-    enableLua = true;
-    enableRust = true;
-    enableMarkdown = true;
-    enableHarper = true;
-    enableNix = true;
-  };
-
-  #zsh
-  programs.zsh.enable = true;
   users.extraUsers.charlie = {
     shell = pkgs.zsh;
   };
+
   environment.variables.ZDOTDIR = "$HOME/.config/zsh";
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.charlie = {
     isNormalUser = true;
     description = "charlie";
@@ -157,9 +137,12 @@
     ];
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  ##############################################################################
+  # System packages
+  ##############################################################################
+
   environment.systemPackages = with pkgs; [
+    # Utilities
     btop
     wget
     ripgrep
@@ -170,47 +153,68 @@
     gnumake
     rsync
     tmux
-
     bat
-
-    # Editors
-    # unstablePkgs.neovim
-    nodejs
-    tree-sitter
     fd
+    tree-sitter
 
-    # Virtualisation/VMs
+    # Editors / Dev tools
+    nodejs
+
+    # Virtualisation
     unstablePkgs.quickemu
     unstablePkgs.spice-gtk
 
     # Teaching
     unstablePkgs.openboard
 
-    # Markdown
+    # Markdown / Documentation
     unstablePkgs.marp-cli
     unstablePkgs.pandoc
     unstablePkgs.texliveSmall
 
+    # Comms
     unstablePkgs.signal-desktop
     brave
 
-    unstablePkgs.yt-dlp
+    # Files
+    localsend
+
+    # Videos
     mpv
     unstablePkgs.makemkv
     unstablePkgs.handbrake
 
-    #pdf
+    # PDFs
     zathura
-
   ];
 
+  ##############################################################################
+  # Fonts
+  ##############################################################################
+
+  fonts.packages = with pkgs; [
+    font-awesome
+    powerline-fonts
+    powerline-symbols
+    nerd-fonts._0xproto
+    nerd-fonts.droid-sans-mono
+  ];
+
+  ##############################################################################
+  # Services
+  ##############################################################################
+
+  # Printing
+  # services.printing.enable = true;
+
+  # Flatpak
+  services.flatpak.enable = true;
   services.flatpak.remotes = [
     {
       name = "flathub";
       location = "https://flathub.org/repo/flathub.flatpakrepo";
     }
   ];
-
   services.flatpak.packages = [
     {
       appId = "com.usebruno.Bruno";
@@ -226,17 +230,75 @@
     }
   ];
 
-  fileSystems."/mnt/media" = {
-    device = "192.168.1.145:/media";
-    fsType = "nfs";
-    options = [
-      "rw"
-      "hard"
-      "intr"
-      "nolock"
-      "uid=1000" # Replace 1000 with your user ID (charlie)
-      "gid=100" # Replace 100 with your group ID (e.g., users)
-    ];
+  # Networking services
+  services.resolved.enable = true;
+
+  # VPNs
+  services.tailscale.enable = true;
+  services.tailscale.useRoutingFeatures = "client";
+  services.mullvad-vpn.enable = true;
+  services.mullvad-vpn.package = pkgs.mullvad-vpn;
+
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+
+  # Input devices
+  hardware.opentabletdriver.enable = true;
+
+  # Drives
+  services.devmon.enable = true;
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
+
+  # Audio
+  services.pulseaudio.enable = false;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
   };
+  security.rtkit.enable = true;
+
+  # Security
+  security.polkit.enable = true;
+
+  ##############################################################################
+  # Programs
+  ##############################################################################
+
+  programs.zoxide.enable = true;
+  programs.kdeconnect.enable = true;
+  programs.mtr.enable = true;
+
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
+  programs.zsh.enable = true;
+
+  ##############################################################################
+  # Developer tools
+  ##############################################################################
+
+  devtools = {
+    enableGit = true;
+    enableBash = true;
+    enablePython = true;
+    enableGo = true;
+    enableLua = true;
+    enableRust = true;
+    enableMarkdown = true;
+    enableHarper = true;
+    enableNix = true;
+  };
+
+  ##############################################################################
+  # Virtualisation
+  ##############################################################################
+
+  virtualisation.spiceUSBRedirection.enable = true;
 
 }

@@ -5,14 +5,13 @@
     /etc/nixos/hardware-configuration.nix
   ];
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   networking.hostName = "framework"; # Define your hostname.
 
   # bios firmware for Framwork ONLY
   services.fwupd.enable = true;
+
+  # power management
+  services.upower.enable = true;
 
   services.tlp = {
     enable = true;
