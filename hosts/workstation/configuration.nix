@@ -55,15 +55,14 @@
   gaming.enableSteam = true;
 
   fileSystems."/mnt/media" = {
-    device = "192.168.1.145:/media";
+    device = "192.168.1.145:/export/media";
     fsType = "nfs";
     options = [
+      "nfsvers=3"
       "rw"
       "hard"
-      "intr"
-      "nolock"
-      "uid=1000" # Replace 1000 with your user ID (charlie)
-      "gid=100" # Replace 100 with your group ID (e.g., users)
+      "_netdev"
+      "proto=tcp"
     ];
   };
 }
