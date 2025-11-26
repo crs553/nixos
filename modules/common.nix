@@ -183,6 +183,7 @@
     mpv
     unstablePkgs.makemkv
     unstablePkgs.handbrake
+    ffmpeg
 
     # PDFs
     zathura
