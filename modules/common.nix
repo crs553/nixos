@@ -231,6 +231,25 @@
     }
   ];
 
+  # Antivirus
+  services.clamav = {
+    daemon.enable = true;
+    updater.enable = true;
+    updater.settings = {
+      LogVerbose = true;
+    };
+    updater.interval = "hourly";
+    scanner.enable = true;
+    scanner.interval = "*-*-* 04:00:00";
+    scanner.scanDirectories = [
+      "/home"
+      "/var/lib"
+      "/tmp"
+      "/etc"
+      "/var/tmp"
+    ];
+  };
+
   # Networking services
   services.resolved.enable = true;
 
