@@ -176,6 +176,7 @@
     # Comms
     unstablePkgs.signal-desktop
     brave
+    unstablePkgs.ladybird
 
     # Files
     localsend
@@ -185,6 +186,7 @@
     unstablePkgs.makemkv
     unstablePkgs.handbrake
     ffmpeg
+    mat2
 
     # PDFs
     zathura
