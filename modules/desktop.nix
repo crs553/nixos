@@ -6,7 +6,6 @@
     theme = "catppuccin-mocha";
     package = pkgs.kdePackages.sddm;
   };
-  #services.displayManager.defaultSession = "hyprland";
   services.displayManager.defaultSession = "hyprland-uwsm";
 
   programs.hyprland = {
@@ -45,6 +44,7 @@
     dunst
     hyprlock
     hyprcursor
+    hypridle
 
     # for screenshots
     grim

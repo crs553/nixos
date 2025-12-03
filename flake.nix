@@ -5,7 +5,7 @@
   # INPUTS
   # ----------------------------------------------------------------------
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
     # Unstable channel – used for packages that are not in the stable set
     nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -15,7 +15,7 @@
 
     # Home Manager (release matching the stable channel)
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -76,7 +76,7 @@
             }
 
             # Global system version
-            { system.stateVersion = "25.05"; }
+            { system.stateVersion = "25.11"; }
           ];
 
           # ----------------------------------------------------------------

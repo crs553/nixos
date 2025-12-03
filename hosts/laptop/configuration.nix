@@ -34,6 +34,12 @@
     };
   };
 
+  boot = {
+    kernelParams = [
+      "acpi_osi=\"!Windows 2020\""
+      "nvme.noacpi=1"
+    ];
+  };
   # Allow unfree packages
   nixpkgs.config = {
     packageOverrides = pkgs: {

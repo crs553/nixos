@@ -49,6 +49,7 @@
   ##############################################################################
 
   boot = {
+
     kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [ "sg" ]; # For MakeMKV
     # Bootloader
@@ -187,6 +188,10 @@
 
     # PDFs
     zathura
+
+    # Image and Video Editing
+    gimp3-with-plugins
+    obs-studio
   ];
 
   ##############################################################################
