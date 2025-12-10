@@ -19,9 +19,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixvim = {
-      url = "github:crs553/nixvim-flake";
-    };
+    #nixvim = {
+    #  url = "github:crs553/nixvim-flake";
+    #};
   };
 
   # ----------------------------------------------------------------------
@@ -34,7 +34,7 @@
       nixos-unstable,
       nix-flatpak,
       home-manager,
-      nixvim,
+      #nixvim,
       ...
     }:
     let
@@ -61,7 +61,7 @@
             "${modulesDir}/desktop.nix"
             "${modulesDir}/devtools.nix"
             "${modulesDir}/gaming.nix"
-            "${modulesDir}/nixvim.nix"
+            #"${modulesDir}/nixvim.nix"
             "${modulesDir}/docker.nix"
 
             # Flatpak support

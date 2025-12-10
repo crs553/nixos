@@ -56,6 +56,9 @@
       libvdpau-va-gl
     ];
   };
+  environment.systemPackages = with pkgs; [
+    pkgs.easyeffects
+  ];
 
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "iHD";
