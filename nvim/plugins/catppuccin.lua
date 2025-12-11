@@ -1,21 +1,21 @@
 require("catppuccin").setup({
-	flavour = "mocha",
-	transparent_background = false,
-	styles = {
-		comments = {"italic"},
-		conditionals = {"italic"},
-	},
-	integrations = {
-		treesitter = true,
-		native_lsp = { enabled = true },
-	},
-	custom_highlights = function(colors)
-		return {
-			LineNr = { fg = colors.overlay1 },
-			CursorLineNr = { fg = colors.pink, style = { "bold" } },
-			CursorLine = { bg = colors.surface0 },
-		}
-	end,
+  flavour = "mocha",
+  transparent_background = false,
+  styles = {
+    comments = {"italic"},
+    conditionals = {"italic"},
+  },
+  integrations = {
+    treesitter = true,
+    native_lsp = { enabled = true },
+  },
+  custom_highlights = function(colors)
+    return {
+      LineNr = { fg = colors.overlay1 },
+      CursorLineNr = { fg = colors.pink, style = {"bold"} },
+      CursorLine = { bg = colors.surface0 },
+    }
+  end,
 })
+
 vim.cmd.colorscheme("catppuccin")
-colorscheme catppuccin

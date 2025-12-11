@@ -1,26 +1,30 @@
 { config, pkgs, ... }:
-{
 
+let
+  toLuaFile = file: ''
+    lua << EOF
+    ${builtins.readFile file}
+    EOF
+  '';
+in
+{
   home.username = "charlie";
   home.homeDirectory = "/home/charlie";
-  home.stateVersion = "25.11"; # Must match the NixOS stateVersion
+  home.stateVersion = "25.11";
 
   programs.home-manager.enable = true;
-  programs.neovim = 
-  let
-    toLua = str: "lua << EOF\n${str}\nEOF\n";
-    toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
-  in
-  {
+
+  programs.neovim = {
     enable = true;
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
+
     plugins = with pkgs.vimPlugins; [
-      { 
-      	plugin = catppuccin-nvim;
-	config = toLuaFile ./nvim/plugins/catppuccin.lua;
+      {
+        plugin = catppuccin-nvim;
+        config = toLuaFile ./nvim/plugins/catppuccin.lua;
       }
       {
         plugin = (nvim-treesitter.withPlugins (p: [
@@ -33,10 +37,21 @@
         ]));
         config = toLuaFile ./nvim/plugins/treesitter.lua;
       }
-    ];
-   extraLuaConfig = ''
-     ${builtins.readFile ./nvim/options.lua}
-   '';
-  };
+      
+      {
+        plugin = oil-nvim;
+        config = toLuaFile ./nvim/plugins/oil.lua;
+      }
 
+      {
+        plugin = mini-icons-nvim;
+        config = "require('mini.icons').setup({})";
+      }
+    ];
+
+    extraConfig = ''
+      ${toLuaFile ./nvim/options.lua}
+    '';
+  };
 }
+
