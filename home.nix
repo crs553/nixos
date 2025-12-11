@@ -9,7 +9,7 @@
   programs.neovim = 
   let
     toLua = str: "lua << EOF\n${str}\nEOF\n";
-    toLuaFile
+    toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
   in
   {
     enable = true;
@@ -18,11 +18,10 @@
     vimAlias = true;
     vimdiffAlias = true;
     plugins = with pkgs.vimPlugins; [
-      nvim-lspconfig
-      nvim-treesitter.withAllGrammars
-      plenary-nvim
-      catppuccin-nvim
-      mini-nvim
+      { 
+      	plugin = catppuccin-nvim;
+	config = toLuaFile ./nvim/plugins/catppuccin.lua;
+      }
       {
         plugin = (nvim-treesitter.withPlugins (p: [
           p.tree-sitter-nix
@@ -32,11 +31,11 @@
           p.tree-sitter-python
           p.tree-sitter-json
         ]));
-        config = toLuaFile ./nvim/plugin/treesitter.lua;
+        config = toLuaFile ./nvim/plugins/treesitter.lua;
       }
     ];
    extraLuaConfig = ''
-     ${builtins.readFile ./nvim/init.lua}
+     ${builtins.readFile ./nvim/options.lua}
    '';
   };
 
