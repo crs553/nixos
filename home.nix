@@ -29,15 +29,21 @@ in
 
     plugins = with pkgs.vimPlugins; [
 
-      #{
-      #  plugin = nvim-lspconfig;
-      #  config = toLuaFile ./nvim/plugin/lsp.lua;
-      #}
+      {
+        plugin = nvim-lspconfig;
+        config = toLuaFile ./nvim/plugins/lsp.lua;
+      }
 
       {
         plugin = catppuccin-nvim;
         config = toLuaFile ./nvim/plugins/catppuccin.lua;
       }
+      {
+        plugin = nvim-cmp;
+        config = toLuaFile ./nvim/plugins/cmp.lua;
+      }
+
+
       {
         plugin = (nvim-treesitter.withPlugins (p: [
           p.tree-sitter-nix
