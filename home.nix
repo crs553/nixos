@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 let
+  toLua = str: "lua << EOF\n${str}\nEOF\n";
   toLuaFile = file: ''
     lua << EOF
     ${builtins.readFile file}
@@ -21,7 +22,18 @@ in
     vimAlias = true;
     vimdiffAlias = true;
 
+    extraPackages =  with pkgs; [
+      lua-language-server
+      nixd
+    ];
+
     plugins = with pkgs.vimPlugins; [
+      
+      {
+        plugin = nvim-lspconfig;
+        config = toLuaFile ./nvim/plugin/lsp.lua;
+      }
+
       {
         plugin = catppuccin-nvim;
         config = toLuaFile ./nvim/plugins/catppuccin.lua;
@@ -39,13 +51,20 @@ in
       }
       
       {
+        plugin = telescope-nvim;
+        config = toLuaFile ./nvim/plugin/telescope.lua;
+      }
+
+      telescope-fzf-native-nvim
+      
+      {
         plugin = oil-nvim;
         config = toLuaFile ./nvim/plugins/oil.lua;
       }
 
       {
-        plugin = mini-icons-nvim;
-        config = "require('mini.icons').setup({})";
+        plugin = mini-icons;
+        config = toLua "require(\"mini.icons\").setup()";
       }
     ];
 
