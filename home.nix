@@ -25,7 +25,6 @@ in
     extraPackages =  with pkgs; [
       lua-language-server
       nixd
-      fortune
     ];
 
     plugins = with pkgs.vimPlugins; [
@@ -38,6 +37,10 @@ in
       {
         plugin = catppuccin-nvim;
         config = toLuaFile ./nvim/plugins/catppuccin.lua;
+      }
+      {
+        plugin = floaterm;
+        config = toLuaFile ./nvim/plugins.floaterm.lua;
       }
       {
         plugin = (nvim-treesitter.withPlugins (p: [
