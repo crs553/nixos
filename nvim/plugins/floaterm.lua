@@ -1,6 +1,5 @@
-local wk = require("which-key")
-local floaterm = require("floaterm")
 
+local wk = require("which-key")
 wk.add({
   {
     "<M-i>",
@@ -15,4 +14,11 @@ wk.add({
     desc = "Toggle Floaterm",
   },
 })
+
+-- Floaterm configuration
+vim.g.floaterm_width = 0.9
+vim.g.floaterm_height = 0.9
+vim.g.floaterm_wintype = "float"
+vim.g.floaterm_borderchars = "─│─│╭╮╯╰"
+
 

@@ -53,7 +53,12 @@
     kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [ "sg" ]; # For MakeMKV
     # Bootloader
-    loader.systemd-boot.enable = true;
+    loader = {
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 10;
+      };
+    };
     loader.efi.canTouchEfiVariables = true;
     plymouth = {
       enable = true;

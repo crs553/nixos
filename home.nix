@@ -8,7 +8,7 @@ let
     EOF
   '';
 in
-{
+  {
   home.username = "charlie";
   home.homeDirectory = "/home/charlie";
   home.stateVersion = "25.11";
@@ -28,7 +28,7 @@ in
     ];
 
     plugins = with pkgs.vimPlugins; [
-      
+
       #{
       #  plugin = nvim-lspconfig;
       #  config = toLuaFile ./nvim/plugin/lsp.lua;
@@ -37,10 +37,6 @@ in
       {
         plugin = catppuccin-nvim;
         config = toLuaFile ./nvim/plugins/catppuccin.lua;
-      }
-      {
-        plugin = floaterm;
-        config = toLuaFile ./nvim/plugins.floaterm.lua;
       }
       {
         plugin = (nvim-treesitter.withPlugins (p: [
@@ -58,7 +54,7 @@ in
         plugin = mini-icons;
         config = toLua "require(\"mini.icons\").setup()";
       }
-      
+
       {
         plugin = oil-nvim;
         config = toLuaFile ./nvim/plugins/oil.lua;
@@ -75,6 +71,10 @@ in
       }
 
       telescope-fzf-native-nvim
+      {
+        plugin = vim-floaterm;
+        config = toLuaFile ./nvim/plugins/floaterm.lua;
+      }
 
       {
         plugin = which-key-nvim;
@@ -85,6 +85,7 @@ in
 
     extraConfig = ''
       ${toLuaFile ./nvim/options.lua}
+      ${toLuaFile ./nvim/autocmds.lua}
     '';
   };
 }
