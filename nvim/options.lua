@@ -5,7 +5,7 @@ opt.clipboard = "unnamedplus" -- Use system clipboard for all operations
 opt.number = true             -- Print the line number in front of each line
 opt.relativenumber = true     -- Show line numbers relative to the cursor
 
-opt.signcolumn = 'yes' 
+opt.signcolumn = 'yes'
 
 opt.cursorline = true         -- Highlight the line of the cursor
 
@@ -45,6 +45,7 @@ opt.showmatch = true          -- Briefly jump to matching bracket
 -- diagnostic tools for lsp
 vim.diagnostic.config({
   virtual_text = true, -- Enable virtual text
+  virtual_lines = true,
   signs = true,        -- Show signs in the gutter
   update_in_insert = false,
   underline = true,

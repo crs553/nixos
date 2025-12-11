@@ -25,6 +25,9 @@ in
     extraPackages =  with pkgs; [
       lua-language-server
       nixd
+      ghostscript
+      lazygit
+      sqlite # for snacks.picker
     ];
 
     plugins = with pkgs.vimPlugins; [
@@ -42,17 +45,12 @@ in
         plugin = nvim-cmp;
         config = toLuaFile ./nvim/plugins/cmp.lua;
       }
+      cmp-nvim-lsp
+      luasnip
 
 
       {
-        plugin = (nvim-treesitter.withPlugins (p: [
-          p.tree-sitter-nix
-          p.tree-sitter-vim
-          p.tree-sitter-bash
-          p.tree-sitter-lua
-          p.tree-sitter-python
-          p.tree-sitter-json
-        ]));
+        plugin = (nvim-treesitter.withAllGrammars);
         config = toLuaFile ./nvim/plugins/treesitter.lua;
       }
 

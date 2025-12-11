@@ -1,48 +1,49 @@
 local on_attach = function(_, bufnr)
+      local map = function(mode, keys, func, desc)
+        vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
+      end
 
-  local bufmap = function(keys, func)
-    vim.keymap.set('n', keys, func, { buffer = bufnr })
-  end
 
-  bufmap('<leader>r', vim.lsp.buf.rename)
-  bufmap('<leader>a', vim.lsp.buf.code_action)
+  map('n','<leader>r', vim.lsp.buf.rename, "Rename")
+  map('n','<leader>a', vim.lsp.buf.code_action, "Code Action")
+  map('n','gd', vim.lsp.buf.definition,"Go to definition")
+  map('n','gD', vim.lsp.buf.declaration,"Go to declaration")
+  map('n','gI', vim.lsp.buf.implementation, "Go to implementation")
+  map('n','<leader>D', vim.lsp.buf.type_definition, "Go to type definition")
 
-  bufmap('gd', vim.lsp.buf.definition)
-  bufmap('gD', vim.lsp.buf.declaration)
-  bufmap('gI', vim.lsp.buf.implementation)
-  bufmap('<leader>D', vim.lsp.buf.type_definition)
+  map('n','gr', require('telescope.builtin').lsp_references, "LSP references")
+  map('n','<leader>s', require('telescope.builtin').lsp_document_symbols, "LSP Document symbols")
+  map('n','<leader>S', require('telescope.builtin').lsp_dynamic_workspace_symbols, "LSP Dynamic Workspace Symbols")
 
-  bufmap('gr', require('telescope.builtin').lsp_references)
-  bufmap('<leader>s', require('telescope.builtin').lsp_document_symbols)
-  bufmap('<leader>S', require('telescope.builtin').lsp_dynamic_workspace_symbols)
+  map('n','K', vim.lsp.buf.hover, "Hover")
 
-  bufmap('K', vim.lsp.buf.hover)
-
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
-  end, {})
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-require('neodev').setup()
-require('lspconfig').lua_ls.setup {
-    on_attach = on_attach,
+
+-- Nix language server
+vim.lsp.config["lua_ls"] = {
+   cmd = { 'lua-language-server' },
+
+   -- Filetypes to automatically attach to.
+   filetypes = { 'lua' },
     capabilities = capabilities,
-	root_dir = function()
-        return vim.loop.cwd()
-    end,
-	cmd = { "lua-lsp" },
+    on_attach = on_attach,
     settings = {
         Lua = {
             workspace = { checkThirdParty = false },
             telemetry = { enable = false },
         },
-    }
+    },
+  filetypes = { "lua" },
 }
-
-require('lspconfig').nixd.setup {
+vim.lsp.enable('lua_ls')
+vim.lsp.config['nixd'] =  {
     on_attach = on_attach,
     capabilities = capabilities,
+    cmd = { "nixd" },
+    filetypes = { "nix" },
 }
+vim.lsp.enable('nixd')
