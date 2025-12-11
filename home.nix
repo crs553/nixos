@@ -61,7 +61,7 @@ in
       }
 
       {
-        plugin = vimPlugins.snacks-nvim;
+        plugin = snacks-nvim;
         config = toLuaFile ./nvim/plugins/snacks.lua;
       }
 
@@ -71,6 +71,12 @@ in
       }
 
       telescope-fzf-native-nvim
+
+      {
+        plugin = which-key-nvim;
+        config = toLuaFile ./nvim/plugins/which-key.lua;
+
+      }
     ];
 
     extraConfig = ''
