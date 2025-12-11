@@ -135,6 +135,8 @@
       mpv
       feh
       starship
+      fortune
+      cowsay
     ];
   };
 
