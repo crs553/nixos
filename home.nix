@@ -29,10 +29,10 @@ in
 
     plugins = with pkgs.vimPlugins; [
       
-      {
-        plugin = nvim-lspconfig;
-        config = toLuaFile ./nvim/plugin/lsp.lua;
-      }
+      #{
+      #  plugin = nvim-lspconfig;
+      #  config = toLuaFile ./nvim/plugin/lsp.lua;
+      #}
 
       {
         plugin = catppuccin-nvim;
@@ -49,13 +49,11 @@ in
         ]));
         config = toLuaFile ./nvim/plugins/treesitter.lua;
       }
-      
-      {
-        plugin = telescope-nvim;
-        config = toLuaFile ./nvim/plugin/telescope.lua;
-      }
 
-      telescope-fzf-native-nvim
+      {
+        plugin = mini-icons;
+        config = toLua "require(\"mini.icons\").setup()";
+      }
       
       {
         plugin = oil-nvim;
@@ -63,9 +61,16 @@ in
       }
 
       {
-        plugin = mini-icons;
-        config = toLua "require(\"mini.icons\").setup()";
+        plugin = vimPlugins.snacks-nvim;
+        config = toLuaFile ./nvim/plugins/snacks.lua;
       }
+
+      {
+        plugin = telescope-nvim;
+        config = toLuaFile ./nvim/plugins/telescope.lua;
+      }
+
+      telescope-fzf-native-nvim
     ];
 
     extraConfig = ''
