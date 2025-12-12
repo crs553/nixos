@@ -38,24 +38,4 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
   end,
 })
--- Conditional formatting for Nix files
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.nix",
-  callback = function()
-    local ft = vim.bo.filetype
-    if ft == "nix" then
-      -- Run nixpkgs-fmt and reload the file
-      local buf = vim.api.nvim_get_current_buf()
-      local fname = vim.api.nvim_buf_get_name(buf)
-      vim.fn.system({ "nixpkgs-fmt", fname })
-      vim.cmd("edit!") -- reload formatted file
-    else
-      -- Otherwise, use LSP formatting
-      vim.lsp.buf.format({ async = false })
-    end
-  end,
-})
-
-
-
 vim.cmd("set completeopt+=noselect")

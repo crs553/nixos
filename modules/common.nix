@@ -151,7 +151,6 @@
 
   environment.systemPackages = with pkgs; [
     # Utilities
-    btop
     wget
     ripgrep
     fzf

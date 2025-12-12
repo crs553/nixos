@@ -12,12 +12,14 @@ let
     inherit pkgs toLua toLuaFile;
   };
 
-in {
+in
+{
   home.username = "charlie";
   home.homeDirectory = "/home/charlie";
   home.stateVersion = "25.11";
 
   programs.home-manager.enable = true;
+  programs.btop.enable = true;
 
   programs.neovim = {
     enable = true;
