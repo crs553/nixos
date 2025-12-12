@@ -1,49 +1,151 @@
-local on_attach = function(_, bufnr)
-      local map = function(mode, keys, func, desc)
-        vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = "LSP: " .. desc })
-      end
+local capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-
-  map('n','<leader>r', vim.lsp.buf.rename, "Rename")
-  map('n','<leader>a', vim.lsp.buf.code_action, "Code Action")
-  map('n','gd', vim.lsp.buf.definition,"Go to definition")
-  map('n','gD', vim.lsp.buf.declaration,"Go to declaration")
-  map('n','gI', vim.lsp.buf.implementation, "Go to implementation")
-  map('n','<leader>D', vim.lsp.buf.type_definition, "Go to type definition")
-
-  map('n','gr', require('telescope.builtin').lsp_references, "LSP references")
-  map('n','<leader>s', require('telescope.builtin').lsp_document_symbols, "LSP Document symbols")
-  map('n','<leader>S', require('telescope.builtin').lsp_dynamic_workspace_symbols, "LSP Dynamic Workspace Symbols")
-
-  map('n','K', vim.lsp.buf.hover, "Hover")
-
-end
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
-
--- Nix language server
+---------------------------------------------------------------------
+-- Lua LS
+---------------------------------------------------------------------
 vim.lsp.config["lua_ls"] = {
-   cmd = { 'lua-language-server' },
-
-   -- Filetypes to automatically attach to.
-   filetypes = { 'lua' },
-    capabilities = capabilities,
-    on_attach = on_attach,
-    settings = {
-        Lua = {
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
-        },
-    },
+  cmd = { 'lua-language-server' },
   filetypes = { "lua" },
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    Lua = {
+      workspace = { checkThirdParty = false },
+      telemetry = { enable = false },
+    },
+    diagnostics = {
+      globals = { "vim" }, -- <<<<< THIS LINE ALLOWS vim AS GLOBAL
+    },
+  },
 }
-vim.lsp.enable('lua_ls')
-vim.lsp.config['nixd'] =  {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    cmd = { "nixd" },
-    filetypes = { "nix" },
+vim.lsp.enable("lua_ls")
+
+---------------------------------------------------------------------
+-- Nixd
+---------------------------------------------------------------------
+vim.lsp.config['nixd'] = {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = { "nixd" },
+  filetypes = { "nix" },
 }
 vim.lsp.enable('nixd')
+
+---------------------------------------------------------------------
+-- YAML: yamlls
+---------------------------------------------------------------------
+vim.lsp.config["yamlls"] = {
+  cmd = { "yaml-language-server", "--stdio" },
+  filetypes = { "yaml", "yml" },
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    yaml = {
+      validate = true,
+      hover = true,
+      completion = true,
+      schemas = {
+        ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+        ["https://json.schemastore.org/kubernetes.json"] = "/*.k8s.yaml",
+        ["https://json.schemastore.org/compose-spec.json"] = "docker-compose*.yaml",
+      },
+    },
+  },
+}
+vim.lsp.enable("yamlls")
+
+---------------------------------------------------------------------
+-- Go: gopls
+---------------------------------------------------------------------
+vim.lsp.config["gopls"] = {
+  cmd = { "gopls" },
+  filetypes = { "go", "gomod", "gowork", "gotmpl" },
+  root_markers = { "go.work", "go.mod", ".git" },
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+        unusedwrite  = true,
+      },
+      staticcheck = true,
+    }
+  }
+}
+vim.lsp.enable("gopls")
+
+---------------------------------------------------------------------
+-- Python: pylsp
+---------------------------------------------------------------------
+vim.lsp.config["pylsp"] = {
+  cmd = { "pylsp" },
+  filetypes = { "python" },
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    pylsp = {
+      plugins = {
+        pyflakes = { enabled = true },
+        pycodestyle = { enabled = true },
+
+        -- Formatters (enable ONE)
+        black = { enabled = true },
+        autopep8 = { enabled = false },
+        yapf = { enabled = false },
+
+        -- Optional checkers
+        pylint = { enabled = false },
+        mccabe = { enabled = true },
+        rope = { enabled = true },
+
+        -- Enable import sorting
+        isort = { enabled = true },
+      },
+    },
+  }
+}
+vim.lsp.enable("pylsp")
+
+---------------------------------------------------------------------
+-- Markdown: marksman
+---------------------------------------------------------------------
+vim.lsp.config["marksman"] = {
+  cmd = { "marksman", "server" },
+  filetypes = { "markdown" },
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+vim.lsp.enable("marksman")
+
+---------------------------------------------------------------------
+-- LTEX Plus: ltex-ls
+---------------------------------------------------------------------
+vim.lsp.config["ltex"] = {
+  cmd = { "ltex-ls" },
+  filetypes = { "tex", "markdown", "org", "txt" },
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    ltex = {
+      language = "en-GB",
+      diagnosticSeverity = "information",
+      disabledRules = {},
+      additionalRules = {
+        enablePickyRules = true,
+      },
+    },
+  },
+}
+vim.lsp.enable("ltex")
+
+---------------------------------------------------------------------
+-- Bash/Zsh: bash-language-server
+---------------------------------------------------------------------
+vim.lsp.config["bashls"] = {
+  cmd = { "bash-language-server", "start" },
+  filetypes = { "sh", "bash", "zsh" },
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+vim.lsp.enable("bashls")

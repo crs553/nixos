@@ -1,4 +1,3 @@
-
 local wk = require("which-key")
 wk.add({
   {
@@ -20,5 +19,3 @@ vim.g.floaterm_width = 0.9
 vim.g.floaterm_height = 0.9
 vim.g.floaterm_wintype = "float"
 vim.g.floaterm_borderchars = "─│─│╭╮╯╰"
-
-

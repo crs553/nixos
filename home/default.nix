@@ -27,11 +27,20 @@ in {
     vimdiffAlias = true;
 
     extraPackages = with pkgs; [
-      lua-language-server
-      nixd
+      bash-language-server
       ghostscript
+      gopls
       lazygit
+      ltex-ls
+      lua-language-server
+      marksman
+      nixd
+      nixpkgs-fmt
+      python313Packages.python-lsp-server
       sqlite
+      yaml-language-server
+      yamllint
+
     ];
 
     inherit (neovimModule) plugins extraConfig;

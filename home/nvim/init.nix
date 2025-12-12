@@ -3,11 +3,11 @@
 {
   plugins = with pkgs.vimPlugins; [
 
+    
     {
       plugin = nvim-lspconfig;
       config = toLuaFile ./plugins/lsp.lua;
     }
-
     {
       plugin = catppuccin-nvim;
       config = toLuaFile ./plugins/catppuccin.lua;
