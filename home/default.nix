@@ -38,11 +38,14 @@ in
       marksman
       nixd
       nixpkgs-fmt
+      nodejs # needed for vscode lang servers
       python313Packages.python-lsp-server
       sqlite
+      typescript-language-server
+      vscode-langservers-extracted
       yaml-language-server
-      yamllint
 
+      yamllint
     ];
 
     inherit (neovimModule) plugins extraConfig;

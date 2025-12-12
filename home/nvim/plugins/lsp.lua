@@ -1,8 +1,6 @@
-local capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
----------------------------------------------------------------------
 -- Lua LS
----------------------------------------------------------------------
 vim.lsp.config["lua_ls"] = {
   cmd = { 'lua-language-server' },
   filetypes = { "lua" },
@@ -20,9 +18,8 @@ vim.lsp.config["lua_ls"] = {
 }
 vim.lsp.enable("lua_ls")
 
----------------------------------------------------------------------
+
 -- Nixd
----------------------------------------------------------------------
 vim.lsp.config['nixd'] = {
   on_attach = on_attach,
   capabilities = capabilities,
@@ -31,9 +28,8 @@ vim.lsp.config['nixd'] = {
 }
 vim.lsp.enable('nixd')
 
----------------------------------------------------------------------
+
 -- YAML: yamlls
----------------------------------------------------------------------
 vim.lsp.config["yamlls"] = {
   cmd = { "yaml-language-server", "--stdio" },
   filetypes = { "yaml", "yml" },
@@ -54,9 +50,8 @@ vim.lsp.config["yamlls"] = {
 }
 vim.lsp.enable("yamlls")
 
----------------------------------------------------------------------
+
 -- Go: gopls
----------------------------------------------------------------------
 vim.lsp.config["gopls"] = {
   cmd = { "gopls" },
   filetypes = { "go", "gomod", "gowork", "gotmpl" },
@@ -75,9 +70,7 @@ vim.lsp.config["gopls"] = {
 }
 vim.lsp.enable("gopls")
 
----------------------------------------------------------------------
 -- Python: pylsp
----------------------------------------------------------------------
 vim.lsp.config["pylsp"] = {
   cmd = { "pylsp" },
   filetypes = { "python" },
@@ -95,7 +88,7 @@ vim.lsp.config["pylsp"] = {
         yapf = { enabled = false },
 
         -- Optional checkers
-        pylint = { enabled = false },
+        pylint = { enabled = true },
         mccabe = { enabled = true },
         rope = { enabled = true },
 
@@ -107,9 +100,7 @@ vim.lsp.config["pylsp"] = {
 }
 vim.lsp.enable("pylsp")
 
----------------------------------------------------------------------
 -- Markdown: marksman
----------------------------------------------------------------------
 vim.lsp.config["marksman"] = {
   cmd = { "marksman", "server" },
   filetypes = { "markdown" },
@@ -118,9 +109,8 @@ vim.lsp.config["marksman"] = {
 }
 vim.lsp.enable("marksman")
 
----------------------------------------------------------------------
--- LTEX Plus: ltex-ls
----------------------------------------------------------------------
+
+-- Latex: ltex-ls
 vim.lsp.config["ltex"] = {
   cmd = { "ltex-ls" },
   filetypes = { "tex", "markdown", "org", "txt" },
@@ -139,9 +129,8 @@ vim.lsp.config["ltex"] = {
 }
 vim.lsp.enable("ltex")
 
----------------------------------------------------------------------
+
 -- Bash/Zsh: bash-language-server
----------------------------------------------------------------------
 vim.lsp.config["bashls"] = {
   cmd = { "bash-language-server", "start" },
   filetypes = { "sh", "bash", "zsh" },
@@ -149,3 +138,45 @@ vim.lsp.config["bashls"] = {
   on_attach = on_attach,
 }
 vim.lsp.enable("bashls")
+
+-- TS/JS LSP
+vim.lsp.config["tsserver"] = {
+  cmd = { "typescript-language-server", "--stdio" },
+  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "jsx", "tsx" },
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+vim.lsp.enable("tsserver")
+
+-- ESLint
+vim.lsp.config["eslint"] = {
+  cmd = { "vscode-eslint-language-server", "--stdio" },
+  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "jsx", "tsx" },
+  init_options = { format = true },
+  on_attach = on_attach,
+}
+vim.lsp.enable("eslint")
+
+-- JSON
+vim.lsp.config["jsonls"] = {
+  cmd = { "vscode-json-language-server", "--stdio" },
+  filetypes = { "json", "jsonc" },
+  on_attach = on_attach,
+}
+vim.lsp.enable("jsonls")
+
+-- HTML
+vim.lsp.config["html"] = {
+  cmd = { "vscode-html-language-server", "--stdio" },
+  filetypes = { "html" },
+  on_attach = on_attach,
+}
+vim.lsp.enable("html")
+
+-- CSS
+vim.lsp.config["cssls"] = {
+  cmd = { "vscode-css-language-server", "--stdio" },
+  filetypes = { "css", "scss", "less" },
+  on_attach = on_attach,
+}
+vim.lsp.enable("cssls")
