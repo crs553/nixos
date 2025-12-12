@@ -45,9 +45,9 @@ opt.showmatch = true -- Briefly jump to matching bracket
 
 -- diagnostic tools for lsp
 vim.diagnostic.config({
-  virtual_text = true, -- Enable virtual text
+  virtual_text = false, -- disabled in favour of the lines
   virtual_lines = true,
-  signs = true,        -- Show signs in the gutter
+  signs = true,         -- Show signs in the gutter
   update_in_insert = false,
   underline = true,
   severity_sort = true,
