@@ -72,7 +72,7 @@
             {
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit inputs; };
-              home-manager.users.charlie = import ./home.nix;
+              home-manager.users.charlie = import ./home;
             }
 
             # Global system version
