@@ -36,11 +36,14 @@ in
       ltex-ls
       lua-language-server
       marksman
+      marp-cli
       nixd
       nixpkgs-fmt
       nodejs # needed for vscode lang servers
+      pandoc
       python313Packages.python-lsp-server
       sqlite
+      texliveSmall
       typescript-language-server
       vscode-langservers-extracted
       yaml-language-server

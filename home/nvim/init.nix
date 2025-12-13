@@ -59,8 +59,9 @@
   ];
 
   extraConfig = ''
-    ${toLuaFile ./options.lua}
     ${toLuaFile ./autocmds.lua}
+    ${toLuaFile ./options.lua}
+    ${toLuaFile ./productiviy.lua}
   '';
 }
 

@@ -1,10 +1,11 @@
 local opt = vim.opt
 
+vim.cmd("set completeopt+=noselect") -- make autocomplete not automatically complete
 
-opt.clipboard = "unnamedplus" -- Use system clipboard for all operations
+opt.clipboard = "unnamedplus"        -- Use system clipboard for all operations
 
-opt.number = true             -- Print the line number in front of each line
-opt.relativenumber = true     -- Show line numbers relative to the cursor
+opt.number = true                    -- Print the line number in front of each line
+opt.relativenumber = true            -- Show line numbers relative to the cursor
 
 opt.signcolumn = 'yes'
 

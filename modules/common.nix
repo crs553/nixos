@@ -175,9 +175,9 @@
     unstablePkgs.openboard
 
     # Markdown / Documentation
-    unstablePkgs.marp-cli
-    unstablePkgs.pandoc
-    unstablePkgs.texliveSmall
+    marp-cli
+    pandoc
+    texliveSmall
 
     # Comms
     unstablePkgs.signal-desktop
