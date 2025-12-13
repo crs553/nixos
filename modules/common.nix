@@ -164,6 +164,13 @@
     fd
     tree-sitter
 
+    (pkgs.catppuccin-sddm.override {
+      flavor = "mocha";
+      accent = "mauve";
+      font = "DroidSansM Nerd Font";
+      fontSize = "9";
+      loginBackground = true;
+    })
     # Editors / Dev tools
     nodejs
 

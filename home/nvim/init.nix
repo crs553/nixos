@@ -61,7 +61,7 @@
   extraConfig = ''
     ${toLuaFile ./autocmds.lua}
     ${toLuaFile ./options.lua}
-    ${toLuaFile ./productiviy.lua}
+    ${toLuaFile ./productivity.lua}
   '';
 }
 

@@ -3,7 +3,7 @@
   services.xserver.enable = true;
   services.displayManager.sddm = {
     enable = true;
-    theme = "catppuccin-mocha";
+    theme = "catppuccin-mocha-mauve";
     package = pkgs.kdePackages.sddm;
   };
   services.displayManager.defaultSession = "hyprland-uwsm";
