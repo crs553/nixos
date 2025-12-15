@@ -22,7 +22,10 @@
   };
 
   # dark mode
-  environment.variables.GTK_THEME = "Adwaita:dark";
+  environment.variables = {
+    GTK_THEME = "Adwaita:dark";
+    EDITOR = "nvim";
+  };
 
   services.dbus.enable = true;
   xdg.portal.enable = true;
