@@ -3,6 +3,7 @@
 let
   # Import Neovim configuration from ./nvim/default.nix
   neovimConfig = import ./nvim/default.nix { inherit config pkgs inputs; };
+  firefoxConfig = import ./firefox/default.nix { inherit config pkgs inputs; };
 in
 {
   home.username = "charlie";
@@ -13,21 +14,13 @@ in
 
   # All programs in a single block
   programs = {
+    firefox = firefoxConfig.programs.firefox;
     # Neovim from your separate config
     neovim = neovimConfig.programs.neovim;
 
     # Other programs
     btop.enable = true;
 
-    firefox = {
-      enable = true;
-      languagePacks = [ "en-GB" ];
-      profiles.default = {
-        settings = {
-          "browser.startup.homepage" = "https://homepage.lab.charlierstubbs.com";
-        };
-      };
-    };
   };
 
   xdg.mimeApps.defaultApplications = {

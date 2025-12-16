@@ -1,4 +1,3 @@
-
 { config, pkgs, inputs, ... }:
 
 let
@@ -56,7 +55,7 @@ in
       cmp-nvim-lsp
       luasnip
       {
-        plugin = nvim-treesitter.withAllGrammars {};
+        plugin = nvim-treesitter.withAllGrammars;
         config = toLuaFile ./plugins/treesitter.lua;
       }
       {
