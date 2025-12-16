@@ -150,6 +150,7 @@
   ##############################################################################
 
   environment.systemPackages = with pkgs; [
+    timeshift
     # Utilities
     wget
     ripgrep
@@ -273,6 +274,9 @@
   # Networking services
   services.resolved.enable = true;
 
+  # quickemu
+  services.spice-vdagentd.enable=true;
+
   # VPNs
   services.tailscale.enable = true;
   services.tailscale.useRoutingFeatures = "client";
@@ -340,5 +344,20 @@
   ##############################################################################
 
   virtualisation.spiceUSBRedirection.enable = true;
+
+  # NFS Share
+  
+  fileSystems."/mnt/media" = {
+    device = "192.168.1.145:/export/media";
+    fsType = "nfs";
+    options = [
+      "nfsvers=3"
+      "rw"
+      "hard"
+      "_netdev"
+      "proto=tcp"
+    ];
+  };
+
 
 }

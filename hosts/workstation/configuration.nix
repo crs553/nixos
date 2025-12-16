@@ -53,16 +53,4 @@
   };
 
   gaming.enableSteam = true;
-
-  fileSystems."/mnt/media" = {
-    device = "192.168.1.145:/export/media";
-    fsType = "nfs";
-    options = [
-      "nfsvers=3"
-      "rw"
-      "hard"
-      "_netdev"
-      "proto=tcp"
-    ];
-  };
 }

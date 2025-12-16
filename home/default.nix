@@ -1,17 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 let
-  toLua = str: "lua << EOF\n${str}\nEOF\n";
-  toLuaFile = file: ''
-    lua << EOF
-    ${builtins.readFile file}
-    EOF
-  '';
-
-  neovimModule = import ./nvim/init.nix {
-    inherit pkgs toLua toLuaFile;
-  };
-
+  # Import Neovim configuration from ./nvim/default.nix
+  neovimConfig = import ./nvim/default.nix { inherit config pkgs inputs; };
 in
 {
   home.username = "charlie";
@@ -19,39 +10,31 @@ in
   home.stateVersion = "25.11";
 
   programs.home-manager.enable = true;
-  programs.btop.enable = true;
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
+  # All programs in a single block
+  programs = {
+    # Neovim from your separate config
+    neovim = neovimConfig.programs.neovim;
 
-    extraPackages = with pkgs; [
-      bash-language-server
-      ghostscript
-      gopls
-      lazygit
-      ltex-ls
-      lua-language-server
-      marksman
-      marp-cli
-      nixd
-      nixpkgs-fmt
-      nodejs # needed for vscode lang servers
-      pandoc
-      python313Packages.python-lsp-server
-      sqlite
-      texliveSmall
-      typescript-language-server
-      vscode-langservers-extracted
-      yaml-language-server
+    # Other programs
+    btop.enable = true;
 
-      yamllint
-    ];
+    firefox = {
+      enable = true;
+      languagePacks = [ "en-GB" ];
+      profiles.default = {
+        settings = {
+          "browser.startup.homepage" = "https://homepage.lab.charlierstubbs.com";
+        };
+      };
+    };
+  };
 
-    inherit (neovimModule) plugins extraConfig;
+  xdg.mimeApps.defaultApplications = {
+    "text/html" = ["firefox.desktop"];
+    "text/xml" = ["firefox.desktop"];
+    "x-scheme-handler/http" = ["firefox.desktop"];
+    "x-scheme-handler/https" = ["firefox.desktop"];
   };
 }
 
