@@ -125,6 +125,7 @@
   #};
 
   #environment.variables.ZDOTDIR = "$HOME/.config/zsh";
+  environment.pathsToLink = [ "/share/zsh" ]; # for home manager completions
 
   users.users.charlie = {
     isNormalUser = true;
@@ -139,7 +140,7 @@
       mullvad-browser
       mpv
       feh
-      starship
+      #starship
       fortune
       cowsay
     ];
