@@ -17,19 +17,12 @@
 
   programs.btop.enable = true;
 
-  xdg.mimeApps.defaultApplications = {
-    "text/html" = ["firefox.desktop"];
-    "text/xml" = ["firefox.desktop"];
-    "x-scheme-handler/http" = ["firefox.desktop"];
-    "x-scheme-handler/https" = ["firefox.desktop"];
-  };
   # Add packages to your user environment
   home.packages = with pkgs; [
     cowsay
     fortune
 
     mullvad-browser
-
 
     vlc
     feh

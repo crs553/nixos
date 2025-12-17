@@ -125,6 +125,8 @@
   users.users.charlie = {
     isNormalUser = true;
     description = "charlie";
+    home = "/home/charlie";
+    shell = pkgs.zsh;
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -137,6 +139,7 @@
   ##############################################################################
 
   environment.systemPackages = with pkgs; [
+    vulnix
     timeshift
     # Utilities
     wget
