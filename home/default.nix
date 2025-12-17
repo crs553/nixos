@@ -4,6 +4,7 @@ let
   # Import Neovim configuration from ./nvim/default.nix
   neovimConfig = import ./nvim/default.nix { inherit config pkgs inputs; };
   firefoxConfig = import ./firefox/default.nix { inherit config pkgs inputs; };
+  zshConfig = import ./zsh/default.nix { inherit config pkgs inputs; };
 in
 {
   home.username = "charlie";
@@ -14,12 +15,14 @@ in
 
   # All programs in a single block
   programs = {
+    btop.enable = true;
+
     firefox = firefoxConfig.programs.firefox;
     # Neovim from your separate config
     neovim = neovimConfig.programs.neovim;
 
     # Other programs
-    btop.enable = true;
+    zsh = zshConfig.programs.zsh;
 
   };
 

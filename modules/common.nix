@@ -120,11 +120,11 @@
   # Users & shells
   ##############################################################################
 
-  users.extraUsers.charlie = {
-    shell = pkgs.zsh;
-  };
+  #users.extraUsers.charlie = {
+  #  shell = pkgs.zsh;
+  #};
 
-  environment.variables.ZDOTDIR = "$HOME/.config/zsh";
+  #environment.variables.ZDOTDIR = "$HOME/.config/zsh";
 
   users.users.charlie = {
     isNormalUser = true;
@@ -321,7 +321,7 @@
     enableSSHSupport = true;
   };
 
-  programs.zsh.enable = true;
+  #programs.zsh.enable = true;
 
   ##############################################################################
   # Developer tools
