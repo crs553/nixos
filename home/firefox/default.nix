@@ -1,15 +1,19 @@
 { config, pkgs, inputs, ... }:
 {
-  firefox = {
+  programs.firefox = {
     enable = true;
     languagePacks = [ "en-GB" ];
     profiles.default = {
+
+
       settings = {
         "browser.startup.homepage" = "https://homepage.lab.charlierstubbs.com";
       };
 
       extensions.packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
         ublock-origin
+        bitwarden
+        sponsorblock
       ];
     };
   };
