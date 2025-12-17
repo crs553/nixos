@@ -1,32 +1,21 @@
 { config, pkgs, inputs, ... }:
 
-let
-  # Import Neovim configuration from ./nvim/default.nix
-  neovimConfig = import ./nvim/default.nix { inherit config pkgs inputs; };
-  firefoxConfig = import ./firefox/default.nix { inherit config pkgs inputs; };
-  zshConfig = import ./zsh/default.nix { inherit config pkgs inputs; };
-  starshipConfig = import ./starship/default.nix { inherit config pkgs inputs; };
-in
 {
+  imports = [
+    ./nvim
+    ./firefox
+    ./starship
+    ./zsh
+    ./zoxide
+  ];
+
   home.username = "charlie";
   home.homeDirectory = "/home/charlie";
   home.stateVersion = "25.11";
 
   programs.home-manager.enable = true;
 
-  # All programs in a single block
-  programs = {
-    btop.enable = true;
-
-    firefox = firefoxConfig.programs.firefox;
-    # Neovim from your separate config
-    neovim = neovimConfig.programs.neovim;
-
-    # Other programs
-    zsh = zshConfig.programs.zsh;
-    starship = starshipConfig.programs.starship;
-
-  };
+  programs.btop.enable = true;
 
   xdg.mimeApps.defaultApplications = {
     "text/html" = ["firefox.desktop"];
@@ -34,5 +23,12 @@ in
     "x-scheme-handler/http" = ["firefox.desktop"];
     "x-scheme-handler/https" = ["firefox.desktop"];
   };
+  # Add packages to your user environment
+  home.packages = with pkgs; [
+    fortune
+    vlc
+    mullvad-browser
+    feh   cowsay   # optional, goes well with fortune
+  ];
 }
 

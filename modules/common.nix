@@ -131,14 +131,6 @@
       "wheel"
       "cdrom"
     ];
-    packages = with pkgs; [
-      vlc
-      mullvad-browser
-      mpv
-      feh
-      fortune
-      cowsay
-    ];
   };
 
   ##############################################################################
@@ -192,7 +184,6 @@
     localsend
 
     # Videos
-    mpv
     unstablePkgs.makemkv
     unstablePkgs.handbrake
     ffmpeg
@@ -308,7 +299,6 @@
   # Programs
   ##############################################################################
 
-  programs.zoxide.enable = true;
   programs.kdeconnect.enable = true;
   programs.mtr.enable = true;
 
