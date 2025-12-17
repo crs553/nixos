@@ -123,7 +123,6 @@
   environment.pathsToLink = [ "/share/zsh" ]; # for home manager completions
 
   users.users.charlie = {
-    shell = pkgs.zsh;
     isNormalUser = true;
     description = "charlie";
     extraGroups = [

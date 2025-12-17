@@ -25,10 +25,14 @@
   };
   # Add packages to your user environment
   home.packages = with pkgs; [
+    cowsay
     fortune
-    vlc
+
     mullvad-browser
-    feh   cowsay   # optional, goes well with fortune
+
+
+    vlc
+    feh
   ];
 }
 
