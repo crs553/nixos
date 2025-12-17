@@ -120,14 +120,10 @@
   # Users & shells
   ##############################################################################
 
-  #users.extraUsers.charlie = {
-  #  shell = pkgs.zsh;
-  #};
-
-  #environment.variables.ZDOTDIR = "$HOME/.config/zsh";
   environment.pathsToLink = [ "/share/zsh" ]; # for home manager completions
 
   users.users.charlie = {
+    shell = pkgs.zsh;
     isNormalUser = true;
     description = "charlie";
     extraGroups = [
@@ -140,7 +136,6 @@
       mullvad-browser
       mpv
       feh
-      #starship
       fortune
       cowsay
     ];
@@ -322,7 +317,7 @@
     enableSSHSupport = true;
   };
 
-  #programs.zsh.enable = true;
+  programs.zsh.enable = true;
 
   ##############################################################################
   # Developer tools

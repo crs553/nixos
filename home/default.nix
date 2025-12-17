@@ -5,6 +5,7 @@ let
   neovimConfig = import ./nvim/default.nix { inherit config pkgs inputs; };
   firefoxConfig = import ./firefox/default.nix { inherit config pkgs inputs; };
   zshConfig = import ./zsh/default.nix { inherit config pkgs inputs; };
+  starshipConfig = import ./starship/default.nix { inherit config pkgs inputs; };
 in
 {
   home.username = "charlie";
@@ -23,6 +24,7 @@ in
 
     # Other programs
     zsh = zshConfig.programs.zsh;
+    starship = starshipConfig.programs.starship;
 
   };
 
