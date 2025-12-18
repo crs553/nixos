@@ -14,7 +14,7 @@ in
 {
   options.devtools = {
     # Changed from lsp to devtools
-    enableGit = mkEnableOption "Enable Git devtools";
+    # enableGit = mkEnableOption "Enable Git devtools";
     enableBash = mkEnableOption "Enable Bash devtools";
     enablePython = mkEnableOption "Enable Python tools (pylsp, pylint, black, python)";
     enableGo = mkEnableOption "Enable Go devtools (gopls)";
@@ -33,7 +33,7 @@ in
         lib.flatten [
 
           # Git
-          (optional cfg.enableGit git)
+          # (optional cfg.enableGit git)
 
           # Bash
           (optional cfg.enableBash bash-language-server)
@@ -75,7 +75,6 @@ in
           # Nix
           (optional cfg.enableNix nixd)
 
-          (optional cfg.enableRemoteDesktop remmina)
         ]
       );
   };

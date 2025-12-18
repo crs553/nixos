@@ -313,7 +313,7 @@
   ##############################################################################
 
   devtools = {
-    enableGit = true;
+    #enableGit = true;
     enableBash = true;
     enablePython = true;
     enableGo = true;

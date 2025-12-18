@@ -4,6 +4,7 @@
   imports = [
     ./firefox
     ./fzf
+    ./git
     ./kitty
     ./mpv
     ./nvim
