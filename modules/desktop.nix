@@ -40,7 +40,6 @@
   security.pam.services.gdm.enableGnomeKeyring = true;
 
   environment.systemPackages = with pkgs; [
-    kitty # needed on isntall
     wezterm
 
     brightnessctl
