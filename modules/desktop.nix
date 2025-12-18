@@ -16,11 +16,6 @@
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  programs.waybar = {
-    enable = true;
-    systemd.target = "hyprland-session.target";
-  };
-
   # dark mode
   environment.variables = {
     GTK_THEME = "Adwaita:dark";
@@ -40,10 +35,8 @@
   security.pam.services.gdm.enableGnomeKeyring = true;
 
   environment.systemPackages = with pkgs; [
-    wezterm
 
     brightnessctl
-    dunst
     hyprlock
     hyprcursor
     hypridle

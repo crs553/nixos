@@ -1,0 +1,23 @@
+[global]
+geometry = "300x80-10+10"
+transparency = 0
+frame_width = 2
+separator_height = 2
+sort = "urgency"
+font = "Monospace 10"
+
+[urgency_low]
+background = "#1E1E2E"
+foreground = "#C6C6D9"
+timeout = 5
+
+[urgency_normal]
+background = "#302D41"
+foreground = "#F5E0DC"
+timeout = 10
+
+[urgency_critical]
+background = "#F38BA8"
+foreground = "#1E1E2E"
+timeout = 0
+
