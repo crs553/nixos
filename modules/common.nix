@@ -144,16 +144,13 @@
     # Utilities
     wget
     ripgrep
-    fzf
     unzip
     dysk
     gcc
     gnumake
     rsync
-    tmux
     bat
     fd
-    tree-sitter
 
     (pkgs.catppuccin-sddm.override {
       flavor = "mocha";

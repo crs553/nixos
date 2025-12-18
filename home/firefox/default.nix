@@ -4,6 +4,12 @@
     enable = true;
     languagePacks = [ "en-GB" ];
     profiles.default = {
+      search = {
+        force = true;
+        default = "kagi";
+        privateDefault = "ddg";
+        order = ["kagi" "ddg" "google"];
+      };
 
 
       settings = {

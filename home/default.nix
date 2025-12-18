@@ -2,11 +2,14 @@
 
 {
   imports = [
-    ./nvim
     ./firefox
+    ./fzf
+    ./mpv
+    ./nvim
     ./starship
-    ./zsh
+    ./tmux
     ./zoxide
+    ./zsh
   ];
 
   home.username = "charlie";
