@@ -141,16 +141,6 @@
   environment.systemPackages = with pkgs; [
     vulnix
     timeshift
-    # Utilities
-    wget
-    ripgrep
-    unzip
-    dysk
-    gcc
-    gnumake
-    rsync
-    bat
-    fd
 
     (pkgs.catppuccin-sddm.override {
       flavor = "mocha";
@@ -166,34 +156,12 @@
     unstablePkgs.quickemu
     unstablePkgs.spice-gtk
 
-    # Teaching
-    unstablePkgs.openboard
-
-    # Markdown / Documentation
-    marp-cli
-    pandoc
-    texliveSmall
-
-    # Comms
-    unstablePkgs.signal-desktop
+    # Web
     brave
-    unstablePkgs.ladybird
 
-    # Files
-    localsend
 
-    # Videos
-    unstablePkgs.makemkv
-    unstablePkgs.handbrake
-    ffmpeg
-    mat2
-
-    # PDFs
-    zathura
 
     # Image and Video Editing
-    gimp3-with-plugins
-    obs-studio
   ];
 
   ##############################################################################
@@ -214,29 +182,6 @@
 
   # Printing
   # services.printing.enable = true;
-
-  # Flatpak
-  services.flatpak.enable = true;
-  services.flatpak.remotes = [
-    {
-      name = "flathub";
-      location = "https://flathub.org/repo/flathub.flatpakrepo";
-    }
-  ];
-  services.flatpak.packages = [
-    {
-      appId = "com.usebruno.Bruno";
-      origin = "flathub";
-    }
-    {
-      appId = "org.onlyoffice.desktopeditors";
-      origin = "flathub";
-    }
-    {
-      appId = "org.qbittorrent.qBittorrent";
-      origin = "flathub";
-    }
-  ];
 
   # Antivirus
   services.clamav = {
@@ -298,7 +243,6 @@
   # Programs
   ##############################################################################
 
-  programs.kdeconnect.enable = true;
   programs.mtr.enable = true;
 
   programs.gnupg.agent = {
@@ -313,7 +257,6 @@
   ##############################################################################
 
   devtools = {
-    #enableGit = true;
     enableBash = true;
     enablePython = true;
     enableGo = true;
