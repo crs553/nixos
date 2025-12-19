@@ -1,3 +1,4 @@
+
 {
   description = "My NixOS general work configuration";
 
@@ -18,14 +19,14 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    #nixvim = {
-    #  url = "github:crs553/nixvim-flake";
-    #};
+    # NixOS hardware modules
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   # ----------------------------------------------------------------------
@@ -38,7 +39,7 @@
       nixos-unstable,
       nix-flatpak,
       home-manager,
-      #nixvim,
+      nixos-hardware,
       ...
     }:
     let
@@ -56,8 +57,14 @@
         nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
+
             # Host‑specific configuration
             ./hosts/${hostName}/configuration.nix
+
+            # Framework Laptop hardware module (only for laptop)
+            (if hostName == "laptop" then
+              nixos-hardware.nixosModules.framework-12th-gen-intel
+            else null)
 
             # Global modules
             /etc/nixos/luks.nix
@@ -124,3 +131,4 @@
       defaultPackage.${system} = self.nixosConfigurations.${defaultHost}.config.system.build.toplevel;
     };
 }
+
