@@ -16,7 +16,6 @@
 
         modules-left = [
           "hyprland/workspaces"
-          "hyprland/scratchpad"
           "hyprland/submap"
         ];
 
