@@ -1,10 +1,8 @@
-# 🧊 NixOS Multi-Host Flake Configuration
+# NixOS Multi-Host Flake Configuration
 
-This repository provides a **single flake-based configuration**.
-It isfor managing multiple NixOS machines, such as a laptop and a workstation,
-with shared modules for desktop setup and LUKS encryption.
+Repository for my single flake-based configuration across multiple-systems
 
-## 📁 Project Structure
+## General Project Structure
 
 ```text
 .
@@ -16,6 +14,7 @@ with shared modules for desktop setup and LUKS encryption.
 │   └── workstation/
 │       ├── configuration.nix
 │       └── hardware-configuration.nix
+└── home/
 └── modules/
     ├── common.nix                # Shared config (locale, users, packages)
     ├── desktop.nix               # Shared desktop setup
@@ -24,34 +23,34 @@ with shared modules for desktop setup and LUKS encryption.
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 Clone the repo:
 
-```bash
-git clone https://github.com/yourusername/nixos-flake.git
+```sh
+git clone https://github.com/crs553/nixos
 cd nixos-flake
 ```
 
-### ⚙️ Rebuild system for a host
+### Rebuild system for a host
 
 Replace `workstation` with your hostname as needed:
 
 I use impure right now as I haven not yet setup secretes.
 
-```bash
+```sh
 sudo nixos-rebuild switch --flake .#workstation --impure
 ```
 
-### 🏗️ Build the system without switching:
+### Build the system without switching:
 
-```bash
+```sh
 nix build .#nixosConfigurations.workstation.config.system.build.toplevel
 ```
 
 ---
 
-## 🔐 Example: `modules/luks.nix`
+## Example: `modules/luks.nix`
 
 You should move your LUKS setup from host configs into this shared module. Example:
 
@@ -66,11 +65,11 @@ You should move your LUKS setup from host configs into this shared module. Examp
 }
 ```
 
-> 💡 Each host can override the UUID in its own config if needed.
+> Each host can override the UUID in its own config if needed.
 
 ---
 
-## 💻 Example: `hosts/workstation/hardware-configuration.nix`
+## Example: `hosts/workstation/hardware-configuration.nix`
 
 This file is **generated** by the `nixos-generate-config` tool and is hardware-specific.
 
