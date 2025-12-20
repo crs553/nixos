@@ -46,6 +46,7 @@
     dysk
     gcc
     gnumake
+    libnotify # for notify send
     
     # Markdown / Documentation
     marp-cli
