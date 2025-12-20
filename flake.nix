@@ -11,8 +11,6 @@
     # Unstable channel – used for packages that are not in the stable set
     nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # Flatpak helper
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
 
     # Home Manager (release matching the stable channel)
     home-manager = {
@@ -34,13 +32,12 @@
   # ----------------------------------------------------------------------
   outputs =
     inputs@{
-      self,
-      nixpkgs,
-      nixos-unstable,
-      nix-flatpak,
-      home-manager,
-      nixos-hardware,
-      ...
+    self,
+    nixpkgs,
+    nixos-unstable,
+    home-manager,
+    nixos-hardware,
+    ...
     }:
     let
       system = "x86_64-linux";
@@ -56,40 +53,31 @@
         hostName:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [
 
-            # Host‑specific configuration
-            ./hosts/${hostName}/configuration.nix
+          modules =
+            [
+              ./hosts/${hostName}/configuration.nix
 
-            # Framework Laptop hardware module (only for laptop)
-            (if hostName == "laptop" then
-              nixos-hardware.nixosModules.framework-12th-gen-intel
-            else null)
+              /etc/nixos/luks.nix
+              "${modulesDir}/common.nix"
+              "${modulesDir}/desktop.nix"
+              "${modulesDir}/devtools.nix"
+              "${modulesDir}/gaming.nix"
+              "${modulesDir}/docker.nix"
 
-            # Global modules
-            /etc/nixos/luks.nix
-            "${modulesDir}/common.nix"
-            "${modulesDir}/desktop.nix"
-            "${modulesDir}/devtools.nix"
-            "${modulesDir}/gaming.nix"
-            "${modulesDir}/docker.nix"
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useUserPackages = true;
+                home-manager.useGlobalPkgs = true;
+                home-manager.extraSpecialArgs = { inherit inputs; };
+                home-manager.users.charlie = import ./home;
+              }
 
-            # Flatpak support
-            nix-flatpak.nixosModules.nix-flatpak
-
-            # Home Manager as a NixOS module
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useUserPackages = true;
-              home-manager.useGlobalPkgs = true;
-              home-manager.extraSpecialArgs = { inherit inputs; };
-              home-manager.users.charlie = import ./home;
-            }
-
-            # Global system version
-            { system.stateVersion = "25.11"; }
-          ];
-
+              { system.stateVersion = "25.11"; }
+            ]
+            ++ nixpkgs.lib.optional
+            (hostName == "laptop")
+            nixos-hardware.nixosModules.framework-12th-gen-intel;
           # ----------------------------------------------------------------
           # Special arguments that are visible to *all* modules
           # ----------------------------------------------------------------
@@ -105,7 +93,7 @@
           };
         };
     in
-    {
+      {
       # ------------------------------------------------------------------
       # NixOS configurations (machines)
       # ------------------------------------------------------------------
