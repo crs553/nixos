@@ -13,6 +13,7 @@
     ./starship
     ./tmux
     ./waybar
+    ./wofi
     ./zoxide
     ./zsh
   ];
