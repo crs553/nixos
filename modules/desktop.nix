@@ -57,7 +57,6 @@
     polkit_gnome
     gnome-disk-utility
 
-    wofi
     tofi
     dconf
 
