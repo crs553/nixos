@@ -23,8 +23,8 @@
       };
 
       urgency_normal = {
-        background = "#302D41";   # mantle
-        foreground = "#F5E0DC";   # pink
+        background = "#1E1E2E";   # base
+        foreground = "#D9E0EE";   # text
         timeout = 10;
       };
 
