@@ -10,6 +10,7 @@
     ./kitty
     ./mpv
     ./nvim
+    ./pandoc
     ./starship
     ./tmux
     ./waybar
@@ -51,7 +52,6 @@
     
     # Markdown / Documentation
     marp-cli
-    pandoc
     texliveSmall
     zathura
 
