@@ -17,6 +17,10 @@ in
 
   programs.kitty = {
     enable = true;
+    settings = {
+      confirm_os_window_close = 0;
+    };
+
 
     # Load the theme from the pinned commit
     extraConfig = builtins.readFile mochaTheme;
