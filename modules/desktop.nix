@@ -52,7 +52,6 @@
     networkmanagerapplet
 
     # filesystem
-    nautilus
     udisks2
     polkit_gnome
     gnome-disk-utility

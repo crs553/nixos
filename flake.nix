@@ -65,6 +65,7 @@
               "${modulesDir}/gaming.nix"
               "${modulesDir}/docker.nix"
 
+              
               home-manager.nixosModules.home-manager
               {
                 home-manager.useUserPackages = true;

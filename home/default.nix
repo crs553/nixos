@@ -83,8 +83,10 @@
     bruno
     bruno-cli
     onlyoffice-desktopeditors
+    libreoffice
     qbittorrent
 
+    nautilus
 
   ];
 }
