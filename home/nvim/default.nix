@@ -1,3 +1,4 @@
+
 { config, pkgs, inputs, ... }:
 
 let
@@ -7,9 +8,11 @@ let
     ${builtins.readFile file}
     EOF
   '';
+
+  py = pkgs.python313Packages;
 in
 
-{
+  {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -18,25 +21,46 @@ in
     vimdiffAlias = true;
 
     extraPackages = with pkgs; [
+      # Language servers
       bash-language-server
-      ghostscript
       gopls
-      lazygit
       ltex-ls
       lua-language-server
       marksman
-      marp-cli
       nixd
-      nixpkgs-fmt
-      nodejs
-      pandoc
-      python313Packages.python-lsp-server
-      sqlite
-      texliveSmall
       typescript-language-server
       vscode-langservers-extracted
       yaml-language-server
+
+      # Dev / tooling
+      lazygit
+      nixpkgs-fmt
+      nodejs
       yamllint
+
+      # Docs / publishing
+      ghostscript
+      marp-cli
+      pandoc
+      texliveSmall
+
+      # Database
+      sqlite
+
+      (python3.withPackages (python-pkgs: with python-pkgs; [
+        pandas
+        requests
+        python-lsp-server
+        black
+        isort
+        pylint
+        mypy
+        pip
+        textual
+        pylatexenc
+        httpx
+
+      ]))
     ];
 
     plugins = with pkgs.vimPlugins; [

@@ -141,6 +141,7 @@
   environment.systemPackages = with pkgs; [
     vulnix
     timeshift
+    nautilus
 
     (pkgs.catppuccin-sddm.override {
       flavor = "mocha";
@@ -258,7 +259,7 @@
 
   devtools = {
     enableBash = true;
-    enablePython = true;
+    #enablePython = true;
     enableGo = true;
     enableLua = true;
     enableRust = true;

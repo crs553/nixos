@@ -12,25 +12,25 @@
         origin = "top-right";
         transparency = 0;
         frame_color = "#302D41";   # mantle
-        separator_color = "#302D41";
+        separator_color = "#FAB387";
         font = "Monospace 10";
       };
 
       urgency_low = {
         background = "#1E1E2E";   # base
-        foreground = "#D9E0EE";   # text
+        foreground = "#A6E3A1";   # text
         timeout = 5;
       };
 
       urgency_normal = {
         background = "#1E1E2E";   # base
-        foreground = "#D9E0EE";   # text
+        foreground = "#F9E2AF";   # text
         timeout = 10;
       };
 
       urgency_critical = {
         background = "#F5C2E7";   # rosewater
-        foreground = "#1E1E2E";   # base
+        foreground = "#F38BA8";   # base
         timeout = 0;
       };
     };

@@ -86,7 +86,21 @@
     libreoffice
     qbittorrent
 
-    nautilus
+    (python3.withPackages (python-pkgs: with python-pkgs; [
+      pandas
+      requests
+      python-lsp-server
+      black
+      isort
+      pylint
+      mypy
+      pip
+      textual
+      pylatexenc
+      httpx
+
+    ]))
+
 
   ];
 }

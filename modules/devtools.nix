@@ -16,7 +16,7 @@ in
     # Changed from lsp to devtools
     # enableGit = mkEnableOption "Enable Git devtools";
     enableBash = mkEnableOption "Enable Bash devtools";
-    enablePython = mkEnableOption "Enable Python tools (pylsp, pylint, black, python)";
+    #enablePython = mkEnableOption "Enable Python tools (pylsp, pylint, black, python)";
     enableGo = mkEnableOption "Enable Go devtools (gopls)";
     enableLua = mkEnableOption "Enable Lua devtools";
     enableRust = mkEnableOption "Enable Rust tools (rust-analyzer, rustup, cargo)";
@@ -39,18 +39,7 @@ in
           (optional cfg.enableBash bash-language-server)
 
           # Python
-          (optional cfg.enablePython (
-            pkgs.python3.withPackages (ps: [
-              ps.python-lsp-server
-              ps.pylint
-              ps.black
-              ps.isort
-              ps.pip
-              ps.pylatexenc
-              ps.mypy
-              ps.black
-            ])
-          ))
+          #(optional cfg.enablePython ())
 
           # Go
           (optional cfg.enableGo gopls)
