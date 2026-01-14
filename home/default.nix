@@ -3,7 +3,6 @@
 {
   imports = [
     ./bat
-    ./dconf
     ./dunst
     ./firefox
     ./fzf
@@ -24,7 +23,6 @@
   home.homeDirectory = "/home/charlie";
   home.stateVersion = "25.11";
 
-  programs.home-manager.enable = true;
 
   programs.btop.enable = true;
 
@@ -50,7 +48,7 @@
     gcc
     gnumake
     libnotify # for notify send
-    
+
     # Markdown / Documentation
     marp-cli
     texliveSmall
@@ -60,7 +58,7 @@
     unzip
     zip
 
-    
+
     # Media
     vlc
     feh
@@ -73,7 +71,7 @@
 
     # Files
     localsend
-    
+
     # Communication
     signal-desktop
 
