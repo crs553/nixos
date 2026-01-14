@@ -141,7 +141,8 @@
   environment.systemPackages = with pkgs; [
     vulnix
     timeshift
-    nautilus
+    yazi
+    nemo
 
     (pkgs.catppuccin-sddm.override {
       flavor = "mocha";
