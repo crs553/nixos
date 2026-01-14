@@ -3,6 +3,7 @@
 {
   imports = [
     ./bat
+    ./dconf
     ./dunst
     ./firefox
     ./fzf
@@ -22,10 +23,6 @@
   home.username = "charlie";
   home.homeDirectory = "/home/charlie";
   home.stateVersion = "25.11";
-
-  home.activation.commands = [
-    "gsettings set org.nemo.preferences show-recent false"
-  ];
 
   programs.home-manager.enable = true;
 
