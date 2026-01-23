@@ -71,6 +71,7 @@
 
     # Files
     localsend
+    veracrypt
 
     # Communication
     signal-desktop

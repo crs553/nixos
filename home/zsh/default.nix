@@ -6,6 +6,7 @@
     shellAliases = {
       ll = "ls -l";
       cd = "z";
+      marp = "marp --browser-path /run/current-system/sw/bin/brave";
     };
     history = {
       size = 10000;
