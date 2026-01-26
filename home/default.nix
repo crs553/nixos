@@ -36,7 +36,7 @@
     fortune
 
     # Browser
-    mullvad-browser
+    #mullvad-browser
 
 
     # utils

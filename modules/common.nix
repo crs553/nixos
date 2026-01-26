@@ -213,7 +213,7 @@
   # VPNs
   services.tailscale.enable = true;
   services.tailscale.useRoutingFeatures = "client";
-  services.mullvad-vpn.enable = true;
+  services.mullvad-vpn.enable = false;
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
   # Bluetooth
