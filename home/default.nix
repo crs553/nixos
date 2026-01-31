@@ -73,9 +73,6 @@
     localsend
     veracrypt
 
-    # Communication
-    signal-desktop
-
     # Teaching
     openboard
 
